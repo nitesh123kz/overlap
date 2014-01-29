@@ -2,19 +2,56 @@ import java.io.IOException;
 import java.util.*;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.*;
-public class Reduce  extends Reducer<Text, IntWritable, Text, IntWritable>
+public class Reduce  extends Reducer<IntWritable, Text, IntWritable, Text>
 {
-//	private static  Map<String, String>  IsExisting = new HashMap<String,String>();
-	public void reduce(Text key, Iterable<Text> values, Context contxt )throws IOException, InterruptedException
+	public void reduce(IntWritable key, Iterable<Text> values, Context contxt )throws IOException, InterruptedException
 	{
-		ArrayList<Text> temp_value = new ArrayList<Text>();
-		for (Text value : values)
+		HashMap<String,Integer> filecount = new HashMap<String,Integer>();
+		ValueComparator bvc =  new ValueComparator(filecount);
+        TreeMap<String,Integer> sorted_map = new TreeMap<String,Integer>(bvc);
+		for(Text filetext : values)
 		{
-			temp_value.add(value);
+			String[] files = filetext.toString().split("/") ;
+			String  file = files[files.length-1];  
+			
+			if(filecount.containsKey(file ))
+			{
+				int value = filecount.get(file ) + 1;
+				//filecount.remove(file );
+				filecount.put(file , value);
+			}
+			else
+			{
+				filecount.put(file.toString(), 1);
+			}
+			
 		}
-		if ( temp_value.contains(new Text("D1")) &&  temp_value.contains(new Text("D2")))
+		sorted_map.putAll(filecount);
+		Iterator<String>  keys =sorted_map.keySet().iterator();
+		StringBuilder file_freq = new StringBuilder();
+		while(keys.hasNext())
 		{
-			contxt.write(key, null);
+			String key_ =  keys.next();
+			file_freq.append(key_+ ":" + filecount.get(key_)+" ");
 		}
+		contxt.write(key, new Text( file_freq.toString()));
+		//if
 	}
+}
+
+class ValueComparator implements Comparator<String> {
+
+    HashMap<String, Integer> base;
+    public ValueComparator(HashMap <String, Integer> base) {
+        this.base = base;
+    }
+
+    // Note: this comparator imposes orderings that are inconsistent with equals.    
+    public int compare(String a, String b) {
+        if (base.get(a) >= base.get(b)) {
+            return -1;
+        } else {
+            return 1;
+        } // returning 0 would merge keys
+    }
 }

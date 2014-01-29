@@ -1,19 +1,29 @@
 import java.io.IOException;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.*;
-public class MapD1  extends Mapper<LongWritable, Text, Text, Text> 
+import org.apache.hadoop.mapreduce.lib.input.FileSplit;
+public class MapD1  extends Mapper<LongWritable, Text, IntWritable, Text> 
 {
 	private Text word = new Text();
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException
 	{
-		//reading D1.txt and  split into array of lines
+		String path_ = ((FileSplit)context.getInputSplit()).getPath().toString();
 		String doc	= value.toString();
-		String[] lines =  doc.split("\n");
-		for ( String line : lines)
+		String[] Keys =  doc.split("&");
+		int key_=0;
+		try
 		{
-			word.set(line);
-			context.write(word, new Text("D1"));
+			 key_ =  Integer.parseInt(Keys[0].split("=")[1]);
 		}
+		catch (Exception e)
+		{
+			System.exit(0);
+		}
+		//for ( String line : lines)
+		//{
+			word.set(doc);
+			context.write(new IntWritable(key_),new Text(path_));
+		//l}
 	}
 	
 	
