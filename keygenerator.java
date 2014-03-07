@@ -180,7 +180,7 @@ public class keygenerator {
         					//System.out.println(" path5");
         					String  ek5 =  iterateKey5.next();
         					
-        					fr.write("K1="+ ek1   +"&K2="+ek2+"&K3="+ek3+"&K4="+ek4+"&K5="+ek5+"\n");
+        					fr.write("K1="+ ek1   +" & K2="+ek2+" & K3="+ek3+" & K4="+ek4+" & K5="+ek5+"\n");
         					//System.out.println("K1="+ ek1   +"&K2="+ek2+"&K3="+ek3+"&K4="+ek4+"&K5="+ek5+"\n");
         				}
         			}
@@ -249,7 +249,7 @@ public class keygenerator {
         					//System.out.println(" path5");
         					String  ek5 =  iteratemKey5.next();
         					
-        					fr2.write("K1="+ ek1   +"&K2="+ek2+"&K3="+ek3+"&K4="+ek4+"&K5="+ek5+"\n");
+        					fr2.write("K1="+ ek1   +" & K2="+ek2+" & K3="+ek3+" & K4="+ek4+" & K5="+ek5+"\n");
         					//System.out.println("K1="+ ek1   +"&K2="+ek2+"&K3="+ek3+"&K4="+ek4+"&K5="+ek5+"\n");
         				}
         			}
