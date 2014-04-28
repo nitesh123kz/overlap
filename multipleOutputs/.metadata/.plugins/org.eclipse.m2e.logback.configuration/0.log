@@ -1,0 +1,12 @@
+2014-04-23 11:18:54,147 [Worker-13] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.apache.mrunit:mrunit:jar:1.2.0-SNAPSHOT is missing, no dependency information available
+2014-04-23 11:18:55,294 [Worker-13] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 2
+2014-04-23 11:18:59,571 [New I/O client worker #1-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar
+2014-04-23 11:18:59,575 [New I/O client worker #1-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading http://repo.maven.apache.org/maven2/junit/junit/4.10/junit-4.10.jar
+2014-04-23 11:19:01,904 [New I/O client worker #1-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/junit/junit/4.10/junit-4.10.jar
+2014-04-23 11:19:01,957 [New I/O client worker #1-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar
+2014-04-23 11:19:54,200 [Worker-14] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.apache.mrunit:mrunit:jar:1.2.0-SNAPSHOT is missing, no dependency information available
+2014-04-23 15:59:30,681 [Worker-106] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 2
+2014-04-23 15:59:31,719 [New I/O client worker #2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/apache/mrunit/mrunit/1.2.0-SNAPSHOT-hadoop2/mrunit-1.2.0-SNAPSHOT-hadoop2.pom
+2014-04-23 15:59:31,723 [Worker-106] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for org.apache.mrunit:mrunit:jar:1.2.0-SNAPSHOT-hadoop2 is missing, no dependency information available
+2014-04-23 15:59:32,178 [Worker-106] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 2
+2014-04-23 15:59:32,833 [New I/O client worker #3-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://repo.maven.apache.org/maven2/org/apache/mrunit/mrunit/1.2.0-SNAPSHOT-hadoop2/mrunit-1.2.0-SNAPSHOT-hadoop2.jar

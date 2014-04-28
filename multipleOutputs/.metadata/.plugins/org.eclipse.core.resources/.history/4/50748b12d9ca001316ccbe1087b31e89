@@ -1,0 +1,46 @@
+package com.paypal;
+
+import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+import org.junit.*;
+import org.apache.hadoop.mrunit.mapreduce.*;
+import org.apache.hadoop.io.*;
+
+import org.powermock.modules.junit4.PowerMockRunner;
+
+/**
+ * Unit test for simple App.
+ */
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({MultipleOutputs.class, WordCount.class})
+public class AppTest 
+    extends TestCase
+{
+	MapDriver<LongWritable, Text, Text, IntWritable> mapDriver;
+	  ReduceDriver<Text, IntWritable, Text, IntWritable> reduceDriver;
+	  MapReduceDriver<LongWritable, Text, Text, IntWritable, Text, IntWritable> mapReduceDriver;
+	 
+	  @Before
+	  public void setUp() {
+	    WordCountMapper mapper = new WordCountMapper();
+	    WordCountReducer reducer = new WordCountReducer();
+	    mapDriver = MapDriver.newMapDriver(mapper);
+	    reduceDriver = ReduceDriver.newReduceDriver(reducer);
+	    mapReduceDriver = MapReduceDriver.newMapReduceDriver(mapper, reducer);
+	  }
+	  
+	  @org.junit.Test
+	  public void test1()   throws    Exception  
+	  {
+	  mapDriver.withInput(new LongWritable(0), new Text("first"));
+      mapDriver.withMultiOutput("output1", new Text("first"), new IntWritable(1));
+      mapDriver.withMultiOutput("output2", "first","first");
+      mapDriver.runTest();
+	  }
+}
