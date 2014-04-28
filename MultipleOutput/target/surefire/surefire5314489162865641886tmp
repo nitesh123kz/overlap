@@ -1,0 +1,5 @@
+#surefire
+#Wed Apr 23 16:50:17 IST 2014
+user.dir=/home/nitesh/multipleOutputs/check/MultipleOutput
+localRepository=/home/nitesh/.m2/repository
+basedir=/home/nitesh/multipleOutputs/check/MultipleOutput
