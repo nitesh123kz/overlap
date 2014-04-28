@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://flatfull.com/themes/scale/index.html -->
+<html lang="en" class="app js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie8 no-ie10 no-ie11 no-ios">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <title>Scale | Web Application</title>
+      <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet"  href="bootstrap.css" type="text/css">
+      <link rel ="stylesheet" href="bootstrap.min.css" type="text/css">
+
+      <link rel ="stylesheet" href="bootstrap-theme.css" type="text/css">
+
+      <link rel ="stylesheet" href="bootstrap-theme.min.css" type="text/css">
+      <link rel="stylesheet" href="app.v1.css" type="text/css">
+      <script src="jquery.min.js"></script>
+      <script src="/js/bootstrap-datepicker.js"></script>
+      <script type="text/javascript" src="d3.js"></script>
+      <link href="c3.min.css" media="screen" rel="stylesheet" type="text/css">
+      <script src="c3.min.js"></script>                     
+      <link rel="stylesheet" href="/css/datepicker.css" type="text/css">
+      <script type="text/javascript" src='global.js'></script>
+      <script type="text/javascript">var select='event';</script>
+      <script type="text/javascript"  src="charts.js"></script>
+      
+
+      <!--[if lt IE 9]> <script src="js/ie/html5shiv.js"></script> <script src="js/ie/respond.min.js"></script> <script src="js/ie/excanvas.js"></script> <![endif]-->
+      <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style>
+      <script type="text/javascript"  src='list.js'></script>
+
+      
+      
+   </head>
+   <body class="" style="">
+      <section class="vbox">
+         <section>
+            <section class="hbox stretch">
+               <!-- .aside --> 
+               <!--<aside class="bg-black aside-md hidden-print" id="nav">
+                  <section class="vbox">
+                     <section class="w-f scrollable">
+                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 665px;">
+                           <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railopacity="0.2" style="overflow: hidden; width: auto; height: 665px;">
+                              <div class="clearfix wrapper dk nav-user hidden-xs">
+                                 <div class="dropdown">
+                                    <!--<a href="http://flatfull.com/themes/scale/index.html#" class="dropdown-toggle" data-toggle="dropdown"> <span class="thumb avatar pull-left m-r"> <img src="./Scale   Web Application_files/a0.png" class="dker" alt="..."> <i class="on md b-black"></i> </span> <span class="hidden-nav-xs clear"> <span class="block m-t-xs"> <strong class="font-bold text-lt">John.Smith</strong> <b class="caret"></b> </span> <span class="text-muted text-xs block">Art Director</span> </span> </a> 
+                                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                       <li> <span class="arrow top hidden-nav-xs"></span> <a href="http://flatfull.com/themes/scale/index.html#">Settings</a> </li>
+                                       <li> <a href="http://flatfull.com/themes/scale/profile.html">Profile</a> </li>
+                                       <li> <a href="http://flatfull.com/themes/scale/index.html#"> <span class="badge bg-danger pull-right">3</span> Notifications </a> </li>
+                                       <li> <a href="http://flatfull.com/themes/scale/docs.html">Help</a> </li>
+                                       <li class="divider"></li>
+                                       <li> <a href="http://flatfull.com/themes/scale/modal.lockme.html" data-toggle="ajaxModal">Logout</a> </li>
+                                    </ul>
+                                    <br/>
+
+                                    <br/>
+                                 </div>
+                              </div>
+                              
+                              <nav class="nav-primary hidden-xs">
+                                 <div class="text-muted text-sm hidden-nav-xs padder m-t-sm m-b-sm">Metric</div>
+                                 <ul class="nav nav-main" data-ride="collapse">
+                                    <li > <a onclick='option("event");' class="auto"> <i class="i i-statistics icon"> </i> <span class="font-bold">Event Counts</span> </a> 
+                                    </li>
+                                 </ul>
+                                 <div id="loading-container" class="loading-container"></div>
+                                 <ul class="nav nav-main" data-ride="collapse">
+
+                                    <li class='hide1'> <a onclick='option("browser");' class="auto"> <i class="i i-statistics icon"> </i> <span class="font-bold">Browser</span> </a> 
+                                    </li>
+
+                                    <li class='hide1'> <a onclick='option("os");' class="auto"> <i class="i i-statistics icon"> </i> <span class="font-bold">Operating System</span> </a> 
+                                    </li>
+
+                                    <li class='hide1'> <a onclick='option("location");' class="auto"> <i class="i i-statistics icon"> </i> <span class="font-bold">Location</span> </a> 
+                                    </li>
+
+                                    <li class='hide1'> <a onclick='option("device");' class="auto"> <i class="i i-statistics icon"> </i> <span class="font-bold">Device</span> </a> 
+                                    </li>
+                                    
+                                    
+                                    <!--<li>
+                                       <a href="http://flatfull.com/themes/scale/index.html#" class="auto"> <span class="pull-right text-muted"> <i class="i i-circle-sm-o text"></i> <i class="i i-circle-sm text-active"></i> </span> <i class="i i-docs icon"> </i> <span class="font-bold">Pages</span> </a> 
+                                       <ul class="nav dk">
+                                          <li> <a href="http://flatfull.com/themes/scale/profile.html" class="auto"> <i class="i i-dot"></i> <span>Profile</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/invoice.html" class="auto"> <i class="i i-dot"></i> <span>Invoice</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/intro.html" class="auto"> <i class="i i-dot"></i> <span>Intro</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/master.html" class="auto"> <i class="i i-dot"></i> <span>Master</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/gmap.html" class="auto"> <i class="i i-dot"></i> <span>Google Map</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/jvectormap.html" class="auto"> <i class="i i-dot"></i> <span>Vector Map</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/signin.html" class="auto"> <i class="i i-dot"></i> <span>Signin</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/signup.html" class="auto"> <i class="i i-dot"></i> <span>Signup</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/404.html" class="auto"> <i class="i i-dot"></i> <span>404</span> </a> </li>
+                                       </ul>
+                                    </li>
+                                    <li>
+                                       <a href="http://flatfull.com/themes/scale/index.html#" class="auto"> <span class="pull-right text-muted"> <i class="i i-circle-sm-o text"></i> <i class="i i-circle-sm text-active"></i> </span> <i class="i i-grid2 icon"> </i> <span class="font-bold">Apps</span> </a> 
+                                       <ul class="nav dk">
+                                          <li> <a href="http://flatfull.com/themes/scale/mail.html" class="auto"> <b class="badge bg-success lt pull-right">2</b> <i class="i i-dot"></i> <span>Mailbox</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/fullcalendar.html" class="auto"> <i class="i i-dot"></i> <span>Calendar</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/project.html" class="auto"> <i class="i i-dot"></i> <span>Project</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/media.html" class="auto"> <i class="i i-dot"></i> <span>Media</span> </a> </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                                 <!--<div class="line dk hidden-nav-xs"></div>
+                                 <div class="text-muted text-xs hidden-nav-xs padder m-t-sm m-b-sm">Lables</div>
+                                 <ul class="nav">
+                                    <li> <a href="http://flatfull.com/themes/scale/mail.html#work"> <i class="i i-circle-sm text-info-dk"></i> <span>Work space</span> </a> </li>
+                                    <li> <a href="http://flatfull.com/themes/scale/mail.html#social"> <i class="i i-circle-sm text-success-dk"></i> <span>Connection</span> </a> </li>
+                                    <li> <a href="http://flatfull.com/themes/scale/mail.html#projects"> <i class="i i-circle-sm text-danger-dk"></i> <span>Projects</span> </a> </li>
+                                 </ul>
+                                 <div class="text-muted text-xs hidden-nav-xs padder m-t-sm m-b-sm">Circles</div>
+                                 <ul class="nav">
+                                    <li> <a href="http://flatfull.com/themes/scale/index.html#"> <i class="i i-circle-sm-o text-success-lt"></i> <span>College</span> </a> </li>
+                                    <li> <a href="http://flatfull.com/themes/scale/index.html#"> <i class="i i-circle-sm-o text-warning"></i> <span>Social</span> </a> </li>
+                                 </ul>
+                              </nav>
+                              <!-- / nav 
+                           </div>
+                           <div class="slimScrollBar" style="background-color: rgb(0, 0, 0); width: 10px; position: absolute; top: 0px; opacity: 0.4; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; right: 0px; height: 665px; background-position: initial initial; background-repeat: initial initial;"></div>
+                           <div class="slimScrollRail" style="width: 10px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; background-color: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 0px; background-position: initial initial; background-repeat: initial initial;"></div>
+                        </div>
+                     </section>
+                     
+                  </section>
+               </aside>
+               <!-- /.aside --> 
+               <section id="content">
+                  <section class="hbox stretch">
+                     <section>
+                        <section class="vbox">
+                           <section class="scrollable padder">
+                              <section class="row m-b-md">
+                                 <div class="col-xs-5"></div>
+                                 <div class="col-xs-6">
+                                    <h1 class="m-b-xs text-black"  id="dashboard">Dashboard</h3>
+                                    
+                                 </div>
+
+                                 <div class="col-sm-6">
+                                       <br/>
+                                       
+                                 </div>
+                                 
+                              </section>
+                              
+                              <!--<div class="row bg-light dk m-b">
+                                 <div class="">
+                                    <section>
+
+                                       
+                                       <div id='events' >
+                                       </div>
+
+                                    </section>
+                                 </div>
+                                 
+                              </div>-->
+                              <div class="panel panel-default">
+                                 <div class="panel panel-heading">
+                                    
+                                    <table>  
+                                       <tr>
+                                          <td  width = "75%">
+                                           <H4> Events</H4>
+                                        </td>
+                                        <td>
+                                          <div class="div2">
+                                          <button type="button" onclick="generate()"  class="btn btn-primary" >Generate  graphs for selected points</button>
+                                          <button onclick="unselect()"  class="btn btn-warning"> Unselect</button>
+                                       
+                                       </div>
+                                       </td>
+                                       </tr>
+                                    </table>
+                                    
+                                 </div>
+                                 <div  class="panel-body">
+
+                                    <div id="events"></div>
+                                 </div>
+                              </div>
+
+                           <!-- -->
+                              <div  class='div1'>
+                                 <div class="col-md-6"></div>
+                                 <div  class="col-md-6">
+                                 <img src='ajax-loader.gif' /></div>
+                              
+
+                              </div>
+                              <section class='div2'>
+                              <!--<div class="row bg-light dk m-b">
+                                 <div class="col-md-6 dker">
+                                    <section>
+                                       
+                                         <div class="col-md-6"> <H4>Browser</H4></div>
+                                          <div class="col-md-6"  >
+                                             <div class="col-md-6"></div>
+                                             <div class="col-md-6" >
+                                               
+                                               <button class="btn btn-success" onclick='b_bar()'> Bar</button>
+                                             
+                                                <button class="btn btn-success" onclick='b_donut()'> Donut</button>
+                                             </div>
+                                          </div>
+                                       
+                                    </section>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <section>
+                                       
+                                         <div class="col-md-6"><H4>Device</H4></div>
+                                          <div class="col-md-6"  >
+                                             <div class="col-md-6"></div>
+                                             <div class="col-md-6" >
+                                               
+                                               <button class="btn btn-success" onclick='d_bar()'> Bar</button>
+                                             
+                                                <button class="btn btn-success" onclick='d_donut()'> Donut</button>
+                                             </div>
+                                          </div>
+                                       
+                                    </section>
+                                 </div>
+                              </div>
+                              <div class="row bg-light dk m-b">
+                                 <div class="col-md-6 dker">
+                                    <div id="browser">
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div id="device">
+                                    </div>
+                                 </div>
+                              </div>-->
+
+                           <div class="col-md-6">   
+                            <div class="panel panel-default">
+                                 <div class="panel panel-heading">
+                                    
+                                    <table>  
+                                       <tr>
+                                          <td  width = "82%">
+                                           <H4> Browser</H4>
+                                        </td>
+                                        <td>
+                                          <button class="btn btn-success" onclick='b_bar()'> Bar</button>
+                                             
+                                          <button class="btn btn-success" onclick='b_donut()'> Donut</button>
+                                       </td>
+                                       </tr>
+                                    </table>
+                                    
+                                 </div>
+                                 <div  class="panel-body">
+
+                                    <div id="browser"></div>
+                                 </div>
+                            </div>
+
+                           </div>
+                           <div class="col-md-6">
+                              <div class="panel panel-default">
+                                 <div class="panel panel-heading">
+                                    
+                                    <table>  
+                                       <tr>
+                                          <td  width = "82%">
+                                           <H4> Device</H4>
+                                        </td>
+                                        <td>
+                                          <button class="btn btn-success" onclick='d_bar()'> Bar</button>
+                                             
+                                          <button class="btn btn-success" onclick='d_donut()'> Donut</button>
+                                       </td>
+                                       </tr>
+                                    </table>
+                                    
+                                 </div>
+                                 <div  class="panel-body">
+
+                                    <div id="device"></div>
+                                 </div>
+                              </div>
+                            </div>
+
+                         <div class="col-md-6">   
+                            <div class="panel panel-default">
+                                 <div class="panel panel-heading">
+                                    
+                                    <table>  
+                                       <tr>
+                                          <td  width = "82%">
+                                           <H4> Operating System</H4>
+                                        </td>
+                                        <td >
+                                          <button class="btn btn-success" onclick='o_bar()'> Bar</button>
+                                             
+                                          <button class="btn btn-success" onclick='o_donut()'> Donut</button>
+                                       </td>
+                                       </tr>
+                                    </table>
+                                    
+                                 </div>
+                                 <div  class="panel-body">
+
+                                    <div id="os"></div>
+                                 </div>
+                            </div>
+
+                           </div>
+                           <div class="col-md-6">
+                              <div class="panel panel-default">
+                                 <div class="panel panel-heading">
+                                    
+                                    <table>  
+                                       <tr>
+                                          <td  width = "82%">
+                                           <H4> Location</H4>
+                                        </td>
+                                        <td>
+                                          <button class="btn btn-success" onclick='l_bar()'> Bar</button>
+                                             
+                                          <button class="btn btn-success" onclick='l_donut()'> Donut</button>
+                                       </td>
+                                       </tr>
+                                    </table>
+                                    
+                                 </div>
+                                 <div  class="panel-body">
+
+                                    <div id="location"></div>
+                                 </div>
+                              </div>
+                            </div>
+
+
+
+                             <!-- <div class="row bg-light dk m-b">
+                                    <div class="col-md-6 dker">
+                                       <section>
+                                          
+                                            <div class="col-md-6"><h4>Operating System</h4></div>
+                                             <div class="col-md-6"  >
+                                                <div class="col-md-6">
+                                                </div>
+                                                <div class="col-md-6" >
+                                                  
+                                                  <button class="btn btn-success" onclick='o_bar()'> Bar</button>
+                                                
+                                                   <button class="btn btn-success" onclick='o_donut()'> Donut</button>
+                                                </div>
+                                             </div>
+                                          
+                                       </section>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <section>
+                                          
+                                            <div class="col-md-6"><H4>Location</H4></div>
+                                             <div class="col-md-6"  >
+                                                <div class="col-md-6"></div>
+                                             <div class="col-md-6" >
+                                               
+                                               <button class="btn btn-success" onclick='l_bar()'> Bar</button>
+                                             
+                                                <button class="btn btn-success" onclick='l_donut()'> Donut</button>
+                                             </div>
+                                             </div>
+                                          
+                                       </section>
+                                    </div>
+                              </div>
+
+                              <div class="row bg-light dk m-b">
+                                 <div class="col-md-6 dker">
+                                    <div id="os">
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div id="location">
+                                    </div>
+                                 </div>
+                              </div>-->   
+                              </section>                           
+                           </section>
+                        </section>
+                     </section>
+                     <!-- side content --> 
+                     
+                     <!-- / side content --> 
+                  </section>
+                  
+               </section>
+            </section>
+         </section>
+      </section>
+      <!-- Bootstrap --> <!-- App --> 
+   
+   <script type="text/javascript">
+     
+      var  im_count = [], cl_count =[], cv_count = [], browserCount=[],timestamp=[];
+
+      var json={};
+      
+      var device_name=[];
+      var device_counts=[];
+      var json_device={};
+      var device_json={};
+
+      var location_name=[];
+      var location_count=[];
+      var json_location={};
+      var  location_json={};
+
+      var os_name=[];
+      var os_count=[];
+      var json_os={};
+      var os_json={};
+
+      var json_browser={};
+     var browser_name=[];
+     var browserCount=[];
+     var  browser_json={};
+
+      var gothrough=0;
+                                                      
+      var json_data={};
+      var testdata={};
+      var data={};
+
+      var  total_browser_name={};
+      var  total_browser_count={};
+      var  total_device_name={};
+      var  total_device_count={};
+      var  total_os_name={};
+      var  total_os_count={};
+      var  total_location_name={};
+      var  total_location_count={};
+
+      var  event_chart,  device_chart,   browser_chart,  os_chart,   location_chart,sorted;
+
+      var  error_data;
+      var url2;$('.div2').hide();$('#buttons').hide();
+
+      var  url_loc=window.location.href;
+      var param_array= url_loc.split('?');
+      url1="http://10.242.83.187/originpolicy.php";
+      url2="http://10.242.83.187/originpolicy2.php";
+      var event_timestamp_global={};
+      if(param_array.length>1)
+      if (param_array[1].length!=0)
+       {
+         url1=  url1+"?" +param_array[1];
+
+         url2=  url2+"?" +param_array[1];
+       }
+
+   
+      $(document).ready(function(){
+                             //$("button").click(function(){
+                               //url2="http://10.242.80.123/originpolicy.php?CampaignID="+9162;
+                               $.ajax({url:url1,type:'get',success:function(result){
+                                 
+                                 //x.innerHTML = JSON.stringify(result);
+                                 //alert('hello1');
+                                 json_data=result;
+                                 create();
+
+                               }, error:function(errordata)
+                               {
+                                 alert("error");
+                                 json_data=errordata;
+                               }});
+                               
+
+                               $.ajax({url:url2,async:true,timeout:400000,error:function(errordata)
+                                 {  
+                                    error_data=errordata;
+
+                                    if(error_data.status==200)
+                                    {
+                                   // data=error_data.resposneText.split(']')[0] +"]";
+                                    //createGeneric();
+                                    }
+
+
+                                    alert('error');
+
+
+                                 }
+                                 , success:function(result)
+                                 {
+                                 //var x=document.getElementById('ajax');
+                                 //x.innerHTML = JSON.stringify(result);
+                                 //alert('hello1');
+                                 data=result;
+                                 globalData=result;
+                                 
+
+
+                                 $('.div1').hide();
+                                 $('.div2').show(); createGeneric();$('#buttons').show();
+
+                                
+
+                               }, complete:function()
+                               {
+                               }
+                                    });
+                             //});
+                           });
+      function create()
+      {
+      d3.json("event.json",function(data)
+      {
+         testdata1=data;
+         event_timestamp={};
+         //alert('hello');
+            
+         for(var i in json_data)
+         {
+            /*if(i>=data.length)
+            {
+               alert('break');
+               break;
+            }*/
+
+            if(event_timestamp.hasOwnProperty(json_data[i].timestamp))
+            {
+               event_timestamp[json_data[i].timestamp]['im']+=parseInt(json_data[i].IM_COUNT);
+               event_timestamp[json_data[i].timestamp]['cl']+=parseInt(json_data[i].CL_COUNT);
+               event_timestamp[json_data[i].timestamp]['cv']+=parseInt(json_data[i].CV_COUNT);
+            }
+            else
+            {
+               event_timestamp[json_data[i].timestamp]={};
+               event_timestamp[json_data[i].timestamp]['im']=parseInt(json_data[i].IM_COUNT);
+               event_timestamp[json_data[i].timestamp]['cl']=parseInt(json_data[i].CL_COUNT);
+               event_timestamp[json_data[i].timestamp]['cv']=parseInt(json_data[i].CV_COUNT);
+            }
+         }
+            event_timestamp_global=event_timestamp;
+            
+            for(var key in event_timestamp)
+            {
+               im_count.push(event_timestamp[key]['im']);
+               cl_count.push(event_timestamp[key]['cl']);
+               cv_count.push(event_timestamp[key]['cv']);
+               datestring = new Date(key);
+               datetimestamp =  datestring.getFullYear()+"-"+(datestring.getMonth()+1)+"-"+datestring.getDate()+" "+datestring.getHours()+":00:00";
+
+               timestamp.push(datetimestamp);
+
+
+            }
+            /*
+            im_count.push(json_data [i].IM_COUNT);
+            //alert("im_count["+i+"]="+data[i].IM_COUNT);
+            cl_count.push(json_data [i].CL_COUNT);
+            cv_count.push(json_data [i].CV_COUNT);
+
+            //var timest = new Date();   
+            //alert(data[i].timestamp);
+            timestamp.push(data[i].timestamp);*/
+
+            //browserCount.push(data[i].br)
+         
+         //alert('hello');
+         makeChart('event');      
+
+          
+      });
+      }
+
+      function createGeneric()
+      {
+         for( var x in  data)
+              {
+               if(data[x].Device != "UNKNOWN")
+               {
+                     if(device_json.hasOwnProperty(data[x].Device))
+                     {
+                        device_json[data[x].Device]= device_json[data[x].Device]+ data[x].Count;
+                     }
+                     else
+                     {
+                        device_json[data[x].Device]  = data[x].Count;
+                     }
+               }
+
+               if(data[x].OS !="UNKNOWN")
+               {
+               if(os_json.hasOwnProperty(data[x].OS))
+               {
+                  os_json[data[x].OS] =os_json[data[x].OS]  +  data[x].Count;
+               }
+               else
+               {
+                  os_json[data[x].OS]=  data[x].Count;
+               }}
+
+               if(data[x].Location  !="UNKNOWN")
+               {
+               if(location_json.hasOwnProperty(data[x].Location))
+               {
+                  location_json[data[x].Location] =  location_json[data[x].Location]  +  data[x].Count;
+               }
+               else{
+                  location_json[data[x].Location]  =  data[x].Count;
+               }
+            }
+               if(data[x].Browser  !=  "UNKNOWN")
+               {
+                              if(browser_json.hasOwnProperty(data[x].Browser))
+                              {
+                                 browser_json[data[x].Browser] =   browser_json[data[x].Browser]  +  data[x].Count;
+                              }
+                              else
+                                 { browser_json[data[x].Browser] =  data[x].Count;}
+
+                             }
+               }
+                  
+         
+             for(var key in device_json)
+             {
+               device_name.push(key);
+               device_counts.push(device_json[key]);
+             }
+
+             total_device_name=device_name;
+             total_device_count=device_counts;
+
+             makeChart('device')
+
+          
+
+         
+
+            
+
+          
+         location_sorted=[];
+            for(var  key in  location_json)
+            {
+                location_sorted.push([key,  location_json[key]]);
+            }         
+var other=0;
+            location_sorted.sort(function(a,b) { return  b[1]-a[1];});
+             for(var i = 0; i<10; i++)
+             {
+               if(i>=location_sorted.length)
+               {
+                  break;
+               }
+               else
+               {
+               //console.log(i);
+               location_name.push(location_sorted[i][0]);
+               location_count.push(location_sorted[i][1]);
+                }
+             }
+
+             if(i<location_sorted.length)
+             {
+               for(;i<location_sorted.length;i++)
+                     other+=location_sorted[i][1];
+             }
+
+             location_name.push('other');
+             location_count.push(other);
+         //
+
+             total_location_name=location_name;
+             total_location_count=location_count;
+             makeChart('location');
+             var others=0;
+
+           
+                          
+         // 
+         os_sorted=[];
+            for(var  key in  os_json)
+            {
+                os_sorted.push([key,  os_json[key]]);
+            }         
+var other=0;
+            os_sorted.sort(function(a,b) { return  b[1]-a[1];});
+             for(var i = 0; i<10; i++)
+             {
+               if(i>=os_sorted.length)
+               {
+                  break;
+               }
+               else
+               {
+               //console.log(i);
+               os_name.push(os_sorted[i][0]);
+               os_count.push(os_sorted[i][1]);
+                }
+             }
+
+             if(i<os_sorted.length)
+             {
+               for(;i<os_sorted.length;i++)
+                     other+=os_sorted[i][1];
+             }
+
+             if(other>0)
+             {
+             os_name.push('other');
+             os_count.push(other);
+             }
+         //
+             //for(var key in os_json)
+             {
+               //os_name.push(key);
+               //os_count.push(os_json[key]);
+             }
+
+             total_os_name=os_name;
+             total_os_count=os_count;
+             makeChart('os');
+           
+            for(var key in  browser_json)
+            {
+               browser_name.push(key);
+               browserCount.push(browser_json[key]);
+                                                    
+            }
+
+            total_browser_name=browser_name;
+            total_browser_count=browserCount;
+            makeChart('browser');
+      }
+
+      </script>
+   </body>
+<script>
+   var selection, generateTimestamp=[],selectOption;
+      function   generate()
+      {
+         generateTimestamp=[];
+         selection  =event_chart.selected();
+         selectOption = selection[0]['id'];
+         for(var x in selection)
+         {
+            if(selection[x]['id']==selectOption)
+            { 
+                var date = new Date(selection[x]['x']);
+                var toPush= date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":00:00";
+               generateTimestamp.push(toPush);
+               createGeneric_option(selectOption.toLocaleUpperCase(),generateTimestamp);
+               //createGeneric_option("Count",generateTimestamp)  ;
+            }
+            else
+            {
+               alert('select  points  from  only  one  category ');
+               break;
+            }
+         }
+          
+      }
+
+      function unselect()
+      {
+         event_chart.unselect();
+         generateTimestamp=[];
+      }
+      function createGeneric_option(selectOption,generateTimestamp)
+      {console.log('enter');
+
+         device_json={};
+         device_name=[];
+         device_counts=[];
+
+         browser_json={};
+         browser_name=[];
+
+         os_json={};
+         os_name=[];
+         os_count=[];
+         browserCount=[];
+
+         location_json={};
+         location_name=[];
+         location_count=[];
+         var i=0;
+         data=globalData;
+         for( var x in  data)
+         {  var   tempdate=  new Date(data[x].timestamp);
+            tempdate =  tempdate.getFullYear()+"-"+(tempdate.getMonth()+1)+"-"+tempdate.getDate()+" "+tempdate.getHours()+":00:00";
+
+
+            if(generateTimestamp.indexOf(tempdate)==-1)
+            {//console.log(i++);
+               continue;} 
+            //else
+            //console.log("enter"+i);
+            i++;  
+               if(data[x].Device != "UNKNOWN")
+               {
+                     if(device_json.hasOwnProperty(data[x].Device))
+                     {
+                        device_json[data[x].Device]= device_json[data[x].Device]+ data[x][selectOption];
+                     }
+                     else
+                     {
+                        device_json[data[x].Device]  = data[x][selectOption];
+                     }
+               }
+
+               if(data[x].OS !="UNKNOWN")
+               {
+               if(os_json.hasOwnProperty(data[x].OS))
+               {
+                  os_json[data[x].OS] =os_json[data[x].OS]  +  data[x][selectOption];
+               }
+               else
+               {
+                  os_json[data[x].OS]=  data[x][selectOption];
+               }}
+
+               if(data[x].Location  !="UNKNOWN")
+               {
+               if(location_json.hasOwnProperty(data[x].Location))
+               {
+                  location_json[data[x].Location] =  location_json[data[x].Location]  +  data[x][selectOption];
+               }
+               else{
+                  location_json[data[x].Location]  =  data[x][selectOption];
+               }
+            }
+               if(data[x].Browser  !=  "UNKNOWN")
+               {
+                              if(browser_json.hasOwnProperty(data[x].Browser))
+                              {
+                                 browser_json[data[x].Browser] =   browser_json[data[x].Browser]  +  data[x][selectOption];
+                              }
+                              else
+                                 { browser_json[data[x].Browser] =  data[x][selectOption];}
+
+                             }
+               }
+                  
+         
+             for(var key in device_json)
+             {
+               device_name.push(key);
+               device_counts.push(device_json[key]);
+             }
+
+             makeChart('device')
+
+          
+
+         
+
+            
+
+             var sorted=[];
+            for(var  key in  location_json)
+            {
+                sorted.push([key,  location_json[key]]);
+            }         
+
+            sorted.sort(function(a,b) { return  b[1]-a[1];});
+             for(var i = 0; i<10; i++)
+             {
+               if(i>=sorted.length)
+                  break;
+               location_name.push(sorted[i][0]);
+               location_count.push(sorted[i][1]);
+             }
+
+             makeChart('location');
+             var others=0;
+
+           
+                          
+         
+             for(var key in os_json)
+             {
+               os_name.push(key);
+               os_count.push(os_json[key]);
+             }
+
+             makeChart('os');
+           
+            for(var key in  browser_json)
+            {
+               browser_name.push(key);
+               browserCount.push(browser_json[key]);
+                                                    
+            }
+
+            makeChart('browser');
+
+           // $('#browser1').attr('checked','checked');
+            //$('.radio-browser').checkboxradio("refresh");
+      }
+
+      </script>
+</html>

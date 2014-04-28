@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jVectorMap demo</title>
+  <link rel="stylesheet" href="jquery-jvectormap-1.1.1.css" type="text/css" media="screen"/>
+  <script src="jquery.js"></script>
+  <script src="jquery-jvectormap-1.1.1.min.js"></script>
+  <script src="jquery-jvectormap-world-mill-en.js"></script>
+<script type="text/javascript" src="http://www.amcharts.com/lib/3/ammap.js"></script>
+<script type="text/javascript" src="http://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+<script type="text/javascript" src="http://www.amcharts.com/lib/3/maps/js/usaLow.js"></script>
+<script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/none.js"></script>
+
+
+</head>
+<body>
+
+<style type="text/css">#chartdiv {
+  width : 100%;
+  height  : 500px;
+}   </style>
+  <div id="chartdiv" height='1400'  width='1400'></div> 
+  <script>
+  AmCharts.makeChart("chartdiv", {
+  type: "map",
+    "theme": "none",
+    pathToImages: "http://www.amcharts.com/lib/3/images/",
+
+  colorSteps: 10,
+
+  dataProvider: {
+    map: "usaLow",
+    areas: [{
+      id: "US-AL",
+      value: 4
+    }, {
+      id: "US-AK",
+      value: 5
+    }, {
+      id: "US-AZ",
+      value: 6
+    }, {
+      id: "US-AR",
+      value: 7
+    }, {
+      id: "US-CA",
+      value: 7
+    }, {
+      id: "US-CO",
+      value: 9
+    }, {
+      id: "US-CT",
+      value: 5
+    }, {
+      id: "US-DE",
+      value: 6
+    }, {
+      id: "US-FL",
+      value: 4
+    }, {
+      id: "US-GA",
+      value: 6
+    }, {
+      id: "US-HI",
+      value: 5
+    }, {
+      id: "US-ID",
+      value: 6
+    }, {
+      id: "US-IL",
+      value: 5
+    }, {
+      id: "US-IN",
+      value: 5
+    }, {
+      id: "US-IA",
+      value: 5
+    }, {
+      id: "US-KS",
+      value: 5
+    }, {
+      id: "US-KY",
+      value: 16
+    }, {
+      id: "US-LA",
+      value: 18
+    }, {
+      id: "US-ME",
+      value: 19
+    }, {
+      id: "US-MD",
+      value: 25
+    }, {
+      id: "US-MA",
+      value: 6
+    }, {
+      id: "US-MI",
+      value: 9
+    }, {
+      id: "US-MN",
+      value: 4
+    }, {
+      id: "US-MS",
+      value: 28
+    }, {
+      id: "US-MO",
+      value: 5
+    }, {
+      id: "US-MT",
+      value: 9
+    }, {
+      id: "US-NE",
+      value: 17
+    }, {
+      id: "US-NV",
+      value: 19
+    }, {
+      id: "US-NH",
+      value: 12
+    }, {
+      id: "US-NJ",
+      value: 8
+    }, {
+      id: "US-NM",
+      value: 18
+    }, {
+      id: "US-NY",
+      value: 18
+    }, {
+      id: "US-NC",
+      value: 8
+    }, {
+      id: "US-ND",
+      value: 6
+    }, {
+      id: "US-OH",
+      value: 11
+    }, {
+      id: "US-OK",
+      value: 3
+    }, {
+      id: "US-OR",
+      value: 3
+    }, {
+      id: "US-PA",
+      value: 21
+    }, {
+      id: "US-RI",
+      value: 10
+    }, {
+      id: "US-SC",
+      value: 4
+    }, {
+      id: "US-SD",
+      value: 7
+    }, {
+      id: "US-TN",
+      value: 5
+    }, {
+      id: "US-TX",
+      value: 20
+    }, {
+      id: "US-UT",
+      value: 22
+    }, {
+      id: "US-VT",
+      value: 6
+    }, {
+      id: "US-VA",
+      value: 7
+    }, {
+      id: "US-WA",
+      value: 5
+    }, {
+      id: "US-WV",
+      value: 18
+    }, {
+      id: "US-WI",
+      value: 5
+    }, {
+      id: "US-WY",
+      value: 4
+    }]
+  },
+
+  areasSettings: {
+    autoZoom: true
+  },
+
+  valueLegend: {
+    right: 10,
+    minValue: "little",
+    maxValue: "a lot!"
+  }
+
+});</script>
+</body>
+</html>

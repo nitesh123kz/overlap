@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+	<script src="jquery.min.js"></script>
+</head>
+<body>
+	<div>
+		<p id="ajax"></p></div>
+	<script type="text/javascript">
+	var json={};
+		$(document).ready(function(){
+									  //$("button").click(function(){
+									    $.ajax({url:"http://192.168.56.1/originpolicy2.php",success:function(result){
+									      var x=document.getElementById('ajax');
+									      x.innerHTML = JSON.stringify(result);
+									      json=result;
+									    }});
+									  //});
+									});
+	</script>
+	
+<p>ajax</p>
+</body>

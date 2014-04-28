@@ -1,0 +1,16 @@
+slave-node-27-228087.slc01.dev.ebayc3.com
+slave-node-26-228084.slc01.dev.ebayc3.com
+slave-node-23-228083.slc01.dev.ebayc3.com
+slave-node-25-228082.slc01.dev.ebayc3.com
+slave-node-24-228081.slc01.dev.ebayc3.com
+slave-node-22-228056.slc01.dev.ebayc3.com
+slave-node-21-228055.slc01.dev.ebayc3.com
+slave-node-20-228034.slc01.dev.ebayc3.com
+slave-node-34-228118.slc01.dev.ebayc3.com
+slave-node-33-228109.slc01.dev.ebayc3.com
+slave-node-35-228094.slc01.dev.ebayc3.com
+slave-node-32-228091.slc01.dev.ebayc3.com
+slave-node-31-228090.slc01.dev.ebayc3.com
+slave-node-30-228088.slc01.dev.ebayc3.com
+slave-node-29-228086.slc01.dev.ebayc3.com
+slave-node-28-228085.slc01.dev.ebayc3.com

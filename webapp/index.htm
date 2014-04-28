@@ -1,0 +1,518 @@
+<!DOCTYPE html>		
+		<html>
+			<head>
+				<!--<script async="" src="./C3.js - D3-based reusable chart library_files/analytics.js"></script>-->
+									<!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+									<script type="text/javascript" src="d3.js"></script>
+
+									<!--<script src="jquery.min.js"></script>-->
+
+									<script src="date.js"></script>
+									<link rel="stylesheet" href="bootstrap.min.css">
+									<!-- Optional theme -->
+									<link rel="stylesheet" href="bootstrap-theme.min.css">
+
+									<link href="c3.min.css" media="screen" rel="stylesheet" type="text/css">
+									<script type="text/javascript" src="jquery-1.11.0.js"></script>
+									<!-- Latest compiled and minified JavaScript -->
+									<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+									<!--<link rel="stylesheet" type="text/css" href="c3.css">-->
+									<script src="c3.min.js"></script>
+									</head>
+			<body  class="bg-success">
+				<br/>
+					<table class="table table-striped" border="0" cellpadding="10" width="60%">
+							<tr >
+								<td width="10%"  height="25%"/>
+								<td height="25%">
+									<table width="800" border="0"  >
+										<tr >
+											<td   valign = "top" width="5%">
+												<br/>
+												<button type="button" class="btn btn-primary">Event-Count</button>
+											</td>
+											<td width="5%"></td>
+											<td height="100" width="95%">
+												<br/>
+												<div id='events'>
+										
+													<script type="text/javascript">
+													/*var  im_count = [], cl_count =[], cv_count = [], browserCount=[],timestamp=[];
+													var json={};
+													
+													d3.json("event.json",function(data)
+													{
+														
+															
+														for(var i in data)
+														{
+															im_count.push(data [i].IM_COUNT);
+															//alert("im_count["+i+"]="+data[i].IM_COUNT);
+															cl_count.push(data [i].CL_COUNT);
+															cv_count.push(data [i].CV_COUNT);	
+															timestamp.push(data[i].timestamp);
+															//browserCount.push(data[i].br)
+														}
+
+
+
+														var new_json={};
+														new_json['x']='date';
+														new_json['x_format']='%Y-%m-%d %H:%M:%S';
+
+														new_json['columns']=[];
+														
+														//timestamp
+														new_json['columns'].push(['date']);
+														for( var x in  timestamp)
+														{
+															new_json['columns'][0].push(timestamp[x]);
+														}
+
+														//IM_COUNT
+														new_json['columns'].push(['im_count']);
+														for(var x in im_count)
+														{
+															//alert("imcount[x]="+im_count[x]);
+															new_json['columns'][1].push(im_count[x]);
+														}
+
+														//CL_COUNT
+														new_json['columns'].push(['cl_count']);
+
+														for(var x in cl_count)
+														{
+															//alert('cl_count['+x+']='+cl_count[x]);
+															new_json['columns'][2].push(cl_count[x]);
+														}
+
+
+														json['data']=new_json;
+														json['bindto']='#events';
+														var axis_json = {};
+														//axis_json['x']={};
+
+														//type of graph
+														var type_json = {};
+														type_json['type'] ='timeseries';
+														axis_json['x']=type_json;
+														axis_json['x']['label']={};
+
+														axis_json['x']['label']['text']='time';
+														axis_json['x']['label']['position']='outer-center';
+														axis_json['y']={};
+														axis_json['y']['label']={};
+														axis_json['y']['label']['text']="event-counts";
+														axis_json['y']['label']['position']='outer-middle';
+														json['axis']=axis_json;
+
+														//tooltip
+														var tooltip = {};
+														var func = 'function (d) { return d.getFullYear()+"-"+d.getDate()+"-"+(d.getMonth()+1);}'; 
+														tooltip['title']=func;
+														//json['format']=tooltip;
+
+														//legend - position
+														var legend= {} ;
+														legend['position']='right';
+														json['legend']= legend;
+
+
+														//zoom
+														var zoom={};
+														zoom['enabled']='true';
+														json['zoom']=zoom;
+
+
+														 //grid-lines
+														 var grid={};
+														 var json_x={}, json_y={};
+														 json_x['show']='true';
+
+														 json_y['show']='true';
+														 //json_y['lines']=[{'value':0}];
+														 grid['x']=json_x;
+														 grid['y']=json_y;
+														 json['grid']=grid;
+
+									   					//alert("helllo");
+									   					//alert(JSON.stringify(json));
+
+
+														var chart1 = c3.generate(json);
+													});*/
+
+													
+													//ajax call
+													var jsondata={};
+													var timecheck;
+													$(document).ready(function(){
+																				  //$("button").click(function(){
+																				    $.ajax({url:"http://192.168.56.1/originpolicy.php", async: true, success:function(result){
+																				      alert(JSON.stringify(result[1]));
+																				      jsondata=result;
+																				      makeEvent(result);
+																				    }});
+																				  //});
+																				});
+													function makeEvent(data)
+													{
+														var  im_count = [], cl_count =[], cv_count = [], browserCount=[],timestamp=[];
+														var json={};
+														
+														//d3.json("event.json",function(data)
+														//{
+															
+																
+															for(var i in data)
+															{
+																im_count.push(data [i].IM_COUNT);
+																//alert("im_count["+i+"]="+data[i].IM_COUNT);
+																cl_count.push(data [i].CL_COUNT);
+																cv_count.push(data [i].CV_COUNT);
+																var date_sample=new Date(data[i].timestamp);
+
+																var timest =  date_sample.getFullYear() + '-' +  (date_sample.getMonth()+1) + '-' +  date_sample.getDate() +  ' ' + date_sample.getHours() + ':00:00';	
+																timestamp.push(timest);
+																//browserCount.push(data[i].br)
+															}
+
+
+
+															var new_json={};
+															new_json['x']='date';
+															new_json['x_format']='%Y-%m-%d %H:%M:%S';
+
+															new_json['columns']=[];
+															
+															//timestamp
+															new_json['columns'].push(['date']);
+															for( var x in  timestamp)
+															{
+																new_json['columns'][0].push(timestamp[x]);
+															}
+
+															//IM_COUNT
+															new_json['columns'].push(['im_count']);
+															for(var x in im_count)
+															{
+																//alert("imcount[x]="+im_count[x]);
+																new_json['columns'][1].push(im_count[x]);
+															}
+
+															//CL_COUNT
+															new_json['columns'].push(['cl_count']);
+
+															for(var x in cl_count)
+															{
+																//alert('cl_count['+x+']='+cl_count[x]);
+																new_json['columns'][2].push(cl_count[x]);
+															}
+
+
+															json['data']=new_json;
+															json['bindto']='#events';
+															var axis_json = {};
+															//axis_json['x']={};
+
+															//type of graph
+															var type_json = {};
+															type_json['type'] ='timeseries';
+															axis_json['x']=type_json;
+															axis_json['x']['label']={};
+
+															axis_json['x']['label']['text']='time';
+															axis_json['x']['label']['position']='outer-center';
+															axis_json['y']={};
+															axis_json['y']['label']={};
+															axis_json['y']['label']['text']="event-counts";
+															axis_json['y']['label']['position']='outer-middle';
+															json['axis']=axis_json;
+
+															//tooltip
+															var tooltip = {};
+															var func = 'function (d) { return d.getFullYear()+"-"+d.getDate()+"-"+(d.getMonth()+1);}'; 
+															tooltip['title']=func;
+															//json['format']=tooltip;
+
+															//legend - position
+															var legend= {} ;
+															legend['position']='right';
+															json['legend']= legend;
+
+
+															//zoom
+															var zoom={};
+															zoom['enabled']='true';
+															json['zoom']=zoom;
+
+
+															 //grid-lines
+															 var grid={};
+															 var json_x={}, json_y={};
+															 json_x['show']='true';
+
+															 json_y['show']='true';
+															 //json_y['lines']=[{'value':0}];
+															 grid['x']=json_x;
+															 grid['y']=json_y;
+															 json['grid']=grid;
+
+										   					//alert("helllo");
+										   					//alert(JSON.stringify(json));
+
+
+															var chart1 = c3.generate(json);
+														//});
+													}
+													
+													
+													</script>
+												</div>
+												<svg class="event_counts"></svg>
+											</td>	
+										</tr>
+									</table>
+								</td>
+								</tr>
+								<tr>
+									<td>
+									<br/>
+									<br/>
+									</td>
+								</tr>
+								<tr>
+									<td  width="10%"></td>
+									<td>
+									<table width="800" border="0">
+										
+										<tr>
+											<td   valign = "top" width="5%">
+												<br/>
+												<button type="button" class="btn btn-info">Browser</button>
+											</td>
+											<td height="200" width="20%">
+												<br/>
+												
+												<div id='browse' class="container-fluid">
+
+													<script>
+														
+													var json_browser={};
+													
+													d3.json("browser.json",function(data)
+													{
+														
+
+														var browser_name=[];
+														var browser_counts=['counts'];
+
+															
+														for(var i in data)
+														{
+															for(var key in data[i])
+															{
+																browser_name.push(key);
+																browser_counts.push(data[i][key]);
+															}
+														}
+
+
+
+														var new_json={};
+														//new_json['x']='x';
+														//new_json['x_format']='%Y-%m-%d %H:%M:%S';
+
+														new_json['columns']=[];
+
+														
+														//new_json['columns'].push(browser_name);
+														new_json['columns'].push(browser_counts);
+														new_json['type']='bar';
+
+
+														json_browser['data']=new_json;
+														
+														json_browser['bindto']='#browse';
+														var axis_x={};
+														axis_x['type']='categorized';
+														axis_x['categories']=browser_name;
+
+														json_browser['axis']={};
+														json_browser['axis']['x']=axis_x;
+
+														//zoom
+														var zoom={};
+														zoom['enabled']='true';
+														json_browser['zoom']=zoom;
+														
+													
+
+
+														//json_browser['data']['type']='bar';
+
+														/*
+														alert(JSON.stringify(json_browser));*/
+														var chart1 = c3.generate(json_browser);
+														
+													});
+													
+													
+													</script>
+												</div>
+											</td>
+											<td width="10%"></td>
+											<td   valign = "top" width="5%">
+												<br/>
+												<button type="button" class="btn btn-success">Device</button>
+											</td>
+											<td height="200" width="20%">
+												
+												<div id="device" class="container-fluid">
+													<script>
+														
+													var json_device={};
+													
+													d3.json("device.json",function(data)
+													{
+														
+
+														var device_name=[];
+														var device_counts=['counts'];
+
+															
+														for(var i in data)
+														{
+															for(var key in data[i])
+															{
+																device_name.push(key);
+																device_counts.push(data[i][key]);
+															}
+														}
+
+
+//color
+														var new_json={};
+														//new_json['x']='x';
+														//new_json['x_format']='%Y-%m-%d %H:%M:%S';
+
+														new_json['columns']=[];
+
+														
+														//new_json['columns'].push(browser_name);
+														new_json['columns'].push(device_counts);
+														new_json['type']='bar';
+
+
+														json_device['data']=new_json;
+														
+														json_device['bindto']='#device';
+														var axis_x={};
+														axis_x['type']='categorized';
+														axis_x['categories']=device_name;
+
+														json_device['axis']={};
+														json_device['axis']['x']=axis_x;
+														//json_browser['axis']=axis_json;
+														
+													
+
+
+														//json_browser['data']['type']='bar';
+														//alert(JSON.stringify(json_device));
+														json_device['color']={};
+														json_device['color']['pattern']=['#723456']
+														var chart1 = c3.generate(json_device);
+														
+													});
+													
+													
+													</script>
+												</div>
+											</td>
+											<td width="10%"></td>
+											<td   valign = "top" width="5%">
+												<br/>
+												<button type="button" class="btn btn-warning">OS</button>
+											</td>
+											<td height="200" width="20%">
+												<br/>
+												<div id="OS" class="container-fluid">
+													<script type="text/javascript">
+															var json_os={};
+													
+													d3.json("OS.json",function(data)
+													{
+														
+
+														var os_name=[];
+														var os_counts=['counts'];
+
+															
+														for(var i in data)
+														{
+															for(var key in data[i])
+															{
+																os_name.push(key);
+																os_counts.push(data[i][key]);
+															}
+														}
+
+
+//color
+														var new_json={};
+														//new_json['x']='x';
+														//new_json['x_format']='%Y-%m-%d %H:%M:%S';
+
+														new_json['columns']=[];
+
+														
+														//new_json['columns'].push(browser_name);
+														new_json['columns'].push(os_counts);
+														new_json['type']='bar';
+
+
+														json_os['data']=new_json;
+														
+														json_os['bindto']='#OS';
+
+														var axis_x={};
+														axis_x['type']='categorized';
+														axis_x['categories']=os_name;
+
+														json_os['axis']={};
+														json_os['axis']['x']=axis_x;
+
+														json_os['color']={};
+														json_os['color']['pattern']=['#123456']
+														var chart1 = c3.generate(json_os);
+														
+													});
+													
+													
+												
+													</script>
+											</div>
+										</td>
+										</tr>
+										
+										
+										
+									</table>
+								</td>
+							</tr>
+						</table>
+				
+				
+
+				
+				
+				
+				<p>
+				
+						My name is Dhruv Sharma
+				</p>
+				
+			</body>
+		</html>
+					
