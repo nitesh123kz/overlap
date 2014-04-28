@@ -1,0 +1,29 @@
+package com.paypal.mpi;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Reducer.Context;
+import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
+
+public class CampaignMetricStage2Mapper extends Mapper<CampaignKey,CampaignEvent,CampaignKey,CampaignEvent >
+{
+	private MultipleOutputs multiple;
+	 
+	
+	public void setup(Context context)throws java.io.IOException ,
+	InterruptedException
+	{
+		 multiple = new  MultipleOutputs(context);
+	}
+	
+	public void map(CampaignKey key, CampaignEvent ev, Context context) throws IOException, InterruptedException
+	{
+		multiple.write("completed",key, ev);
+		
+	}
+
+}

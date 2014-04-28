@@ -1,0 +1,54 @@
+package com.paypal.mpi;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.mapreduce.Reducer;
+
+public class CampaignMetricStage2Reducer extends Reducer<CampaignKey,Iterable<CampaignEvent>,CampaignMetricGenericCountDBWritable,NullWritable>
+{
+	private HashMap<List<String>,Integer> map = new HashMap<List<String>,Integer>();
+	
+	private String browser;
+	private String device;
+	private String OS;
+	private String location;
+
+	public void reduce(CampaignKey key,Iterable<CampaignEvent> Events ,Context context ) throws IOException,InterruptedException
+	{ 
+		
+		for(CampaignEvent event: Events)
+		{
+			browser= event.browser;
+			if(browser==null)
+				browser = "";
+			
+			device = event.device;
+			if(device==null)
+				device = "";
+			
+			OS = event.os;
+			if (OS == null)
+				OS = "";
+			
+			location = event.geoState;
+			if(location ==null)
+				location = "";
+			List<String> list = new LinkedList<String>();
+			list.add(browser);
+			list.add(device);
+			list.add(OS);
+			list.add(location);
+			if( map.containsKey(list ))
+			{
+				int count=map.get(list);
+				count++;
+				map.put(list,count);
+			}
+					  
+		}
+	}
+ }

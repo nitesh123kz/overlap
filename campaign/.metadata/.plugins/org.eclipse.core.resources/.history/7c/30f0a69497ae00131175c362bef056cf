@@ -1,0 +1,116 @@
+package com.paypal.mpi;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
+//import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
+
+//public class CampaignMetricStage2Reducer extends Reducer<CampaignKey,Iterable<CampaignEvent>,CampaignMetricGenericCountDBWritable,NullWritable>
+public class CampaignMetricStage2Reducer extends Reducer<CampaignKey,Iterable<CampaignEvent>,CampaignKey,CampaignEvent>
+{
+	private  Map<List<String>,Integer> map = new HashMap<List<String>,Integer>();
+	
+	private String browser;
+	private String device;
+	private String OS;
+	private String location;
+	private String timestamp;
+	private MultipleOutputs multiple;
+	public void setup(Context context)throws java.io.IOException ,
+	InterruptedException
+	{
+		 String period = context.getConfiguration().get("period");
+		 String[] periods =  period.split("/");
+		 String time = periods[0]+"-"+periods[1]+"-"+periods[2]+" "+periods[3]+":00:00";
+		 
+		 
+		 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 Date date;
+		 
+		 multiple = new  MultipleOutputs(context);
+		  
+		try {
+			date = formatter.parse(time);
+			timestamp = formatter.format(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		 
+	}
+
+	public void reduce(CampaignKey key,Iterable<CampaignEvent> Events ,Context context ) throws IOException,InterruptedException
+	{ 
+		
+		for(CampaignEvent event: Events)
+		{
+			browser= event.browser;
+			if(browser==null)
+				browser = "";
+			
+			device = event.device;
+			if(device==null)
+				device = "";
+			
+			OS = event.os;
+			if (OS == null)
+				OS = "";
+			
+			location = event.geoState;
+			if(location ==null)
+				location = "";
+			List<String> list = new LinkedList<String>();
+			list.add(browser);
+			list.add(device);
+			list.add(OS);
+			list.add(location);
+			if( map.containsKey(list ))
+			{
+				System.out.println(list);
+				int count=map.get(list);
+				count++;
+				map.put(list,count);
+			}
+			else
+				map.put(list,1);
+					  
+		}
+		
+		for(Map.Entry<List<String>,Integer > entry: map.entrySet())
+		{
+			
+			//context.getCounter(entry.getKey().toString(), entry.getValue().toString()).increment(1);
+			try{
+			multiple.write("DBOutput",DBObject(key,entry), NullWritable.get());
+			}
+			catch(Exception e)
+			{
+				
+			}
+			
+		}
+		
+	}
+	
+	protected void cleanup(Context context) throws IOException, InterruptedException {
+        multiple.close();
+   }
+	private CampaignMetricGenericCountDBWritable DBObject(CampaignKey key, Entry<List<String>,Integer>  entry)
+	{
+		List<String> list = entry.getKey();
+		int value =  entry.getValue();
+		
+		CampaignMetricGenericCountDBWritable CMGCDBW = new CampaignMetricGenericCountDBWritable(key.getCampaignID(),key.getOfferID(),key.getOfferVID(),timestamp,list.get(0),list.get(1),list.get(2),list.get(3),value );
+		return CMGCDBW;
+	}
+ }

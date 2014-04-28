@@ -1,0 +1,207 @@
+package com.paypal.mpi;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.Writable;
+
+import com.paypal.fpti.sessionization.model.TextMapWritable;
+
+public class CampaignMetric implements Writable
+{
+	String campaign_id="";
+	String offer_id="";
+	String offer_vid ="";
+	String timestamp="";
+	int  im_count=0;
+	int cl_count=0;
+	int cv_count=0;
+	HashMap<String,Integer> browser_count = new HashMap<String,Integer >();
+	HashMap<String,Integer> os_count = new HashMap<String,Integer >();
+	HashMap<String,Integer> geo_state_count = new HashMap<String,Integer >();
+	HashMap<String,Integer> device_count = new HashMap<String,Integer >();
+	@Override
+	public void readFields(DataInput in) throws IOException {
+		// read visit data
+		//clear();
+		
+		campaign_id = Text.readString(in);
+		offer_id= Text.readString(in);
+		offer_vid = Text.readString(in);
+		timestamp = Text.readString(in);
+		im_count =  in.readInt();
+		cl_count = in.readInt();
+		cv_count =  in.readInt();
+		
+		TextMapWritable parameterMap = new TextMapWritable();
+		parameterMap.readFields(in);
+		
+		browser_count.clear();
+		for (Map.Entry<Text, Text> entry : parameterMap.entrySet()) {
+			browser_count.put(entry.getKey().toString(),
+					Integer.parseInt( entry.getValue().toString()));
+		}
+		
+		
+		parameterMap.clear();
+		parameterMap.readFields(in);
+		
+		os_count.clear();
+		for (Map.Entry<Text, Text> entry : parameterMap.entrySet()) {
+			os_count.put(entry.getKey().toString(),
+					Integer.parseInt( entry.getValue().toString()));
+		}
+		
+		parameterMap.clear();
+		parameterMap.readFields(in);
+		
+		geo_state_count.clear();
+		for (Map.Entry<Text, Text> entry : parameterMap.entrySet()) {
+			geo_state_count.put(entry.getKey().toString(),
+					Integer.parseInt( entry.getValue().toString()));
+		}
+		
+		
+		parameterMap.clear();
+		parameterMap.readFields(in);
+		device_count.clear();
+		for (Map.Entry<Text, Text> entry : parameterMap.entrySet()) {
+			device_count.put(entry.getKey().toString(),
+					Integer.parseInt( entry.getValue().toString()));
+		}
+		
+		
+		 
+		
+	}
+	
+	public  void clear()
+	{
+		 campaign_id="";
+		 offer_id="";
+		 
+		 offer_vid="";
+		 timestamp="";
+		 im_count=0;
+		 cl_count=0;
+		 cv_count=0;
+		 
+		 browser_count.clear();
+		 os_count.clear();
+		 geo_state_count.clear();
+		 device_count.clear();
+		
+		
+	}
+
+	@Override
+	public void write(DataOutput out) throws IOException {
+		Text.writeString(out, campaign_id);
+		Text.writeString(out, offer_id);
+		Text.writeString(out,offer_vid);
+		Text.writeString(out, timestamp);
+		out.writeInt(im_count);
+		out.writeInt(cl_count);
+		out.writeInt(cv_count);
+		
+		 Map<String, String> temp= new HashMap<String,String>();
+		for (Map.Entry<String, Integer> entry : browser_count.entrySet()) {
+			temp.put( entry.getKey() ,
+					 entry.getValue().toString() );
+		}
+		TextMapWritable parameterMap = new TextMapWritable(temp);
+		
+		parameterMap.write(out);
+		
+		
+		
+		temp.clear();
+		for (Map.Entry<String, Integer> entry : os_count.entrySet()) {
+			temp.put( entry.getKey() ,
+					 entry.getValue().toString() );
+		}
+		parameterMap.clear();
+	    parameterMap = new TextMapWritable(temp);
+		
+		parameterMap.write(out);
+		
+
+		
+		
+		temp.clear();
+		for (Map.Entry<String, Integer> entry : geo_state_count.entrySet()) {
+			temp.put( entry.getKey() ,
+					 entry.getValue().toString() );
+		}
+		parameterMap.clear();
+	    parameterMap = new TextMapWritable(temp);
+		
+		parameterMap.write(out);
+		
+
+		
+		
+		temp.clear();
+		for (Map.Entry<String, Integer> entry : device_count.entrySet()) {
+			temp.put( entry.getKey() ,
+					 entry.getValue().toString() );
+		}
+		parameterMap.clear();
+	    parameterMap = new TextMapWritable(temp);
+		
+		parameterMap.write(out);
+		
+		
+	}
+	
+	
+	
+	
+	public String toString(){
+		return toJson();
+	}
+
+	public String toJson() {
+		try {
+			StringBuilder buf = new StringBuilder();
+			buf.append("\"CampaignMetric\" : {")
+			.append("\"campaignID\" :").append("\""+campaign_id+"\"")
+			.append(", \"offerID\" :").append("\""+offer_id+"\"")
+			.append(", \"offerVID\" :").append("\""+offer_vid+"\"")
+			.append(", \"timestamp\" :").append("\""+timestamp+"\"")
+			.append(", \"imCount\" :").append("\""+im_count+"\"" )
+			.append(", \"clCount\" :").append("\""+cl_count+"\"")
+			.append(", \"cvCount\" :").append("\""+cv_count+"\"")
+			.append(", \"browser\" : {").append(convertMapToString(browser_count)).append("}")
+			.append(", \"OS\" : {").append(convertMapToString(os_count)).append("}")
+			.append(", \"geoState\" : {").append(convertMapToString(geo_state_count)).append("}")
+			.append(", \"Device\" : {").append(convertMapToString(device_count)).append("}")
+			.append("}");
+			
+			
+			return buf.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "";
+	}
+	
+	private  String convertMapToString(HashMap<String,Integer> map) throws IOException
+	{
+		StringBuilder str = new StringBuilder();
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			if(entry.getKey().length()>0)
+			str.append("\""+entry.getKey()+"\" :").append("\""+entry.getValue()+"\",");
+			else
+				str.append("\""+"UNKNOWN"+"\" :").append("\"" + entry.getValue()+"\",");
+		}
+		str.deleteCharAt(str.length()-1);
+		
+		return  str.toString();
+	}
+
+}

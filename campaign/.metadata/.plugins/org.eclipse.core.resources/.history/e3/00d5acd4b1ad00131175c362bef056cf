@@ -1,0 +1,5 @@
+package com.paypal.mpi;
+
+public class CampaignMetricStage2Reducer {
+
+}

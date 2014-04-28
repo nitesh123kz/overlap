@@ -1,0 +1,16 @@
+package com.paypal.mpi;
+
+import java.io.IOException;
+
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.mapreduce.Reducer;
+
+public class CampaignMetricStage2Reducer extends Reducer<CampaignKey,Iterable<CampaignEvent>,CampaignMetricGenericCountDBWritable,NullWritable>
+{
+
+	public void reduce(CampaignKey key,Iterable<CampaignEvent> Events ,Context context ) throws IOException,InterruptedException
+	{
+	
+		
+	}
+}

@@ -1,0 +1,105 @@
+package com.paypal.mpi;
+
+import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.io.*;
+
+//public class CampaignMetricReducer  extends Reducer<CampaignKey,CampaignEvent,CampaignKey,CampaignMetric>
+public class CampaignMetricReducer  extends Reducer<CampaignKey,CampaignEvent,CampaignEventCountDBWritable,NullWritable>
+{
+	private String campaign_id="";
+	private String offer_id="";
+	private String timestamp="";
+	 
+	
+	public void setup(Context context)throws java.io.IOException,
+	InterruptedException
+	{
+		 timestamp = context.getConfiguration().get("period");	
+	}
+	public void reduce(CampaignKey key,  Iterable<CampaignEvent>  events, Context context)
+	throws java.io.IOException,InterruptedException	
+	{
+		
+		
+		campaign_id =  key.getCampaignID();
+		
+		offer_id  =  key.getOfferID();
+		
+		CampaignMetric cMetric = new CampaignMetric();
+		cMetric.clear();
+		cMetric.campaign_id = campaign_id;
+		cMetric.offer_id =  offer_id;
+		cMetric.timestamp  = timestamp;
+		
+		for(CampaignEvent event : events)
+		{
+			if( cMetric.browser_count.containsKey(  event.browser))
+			{
+				 int value = cMetric.browser_count.get(event.browser);
+				 value++;
+				 cMetric.browser_count.put(event.browser, value);
+			}
+			else
+			{
+				cMetric.browser_count.put(event.browser, 1);
+			}
+			
+			if( cMetric.os_count.containsKey(  event.os))
+			{
+				 int value = cMetric.os_count.get(event.os);
+				 value++;
+				 cMetric.os_count.put(event.os, value);
+			}
+			else
+			{
+				cMetric.os_count.put(event.os, 1);
+			}
+			
+			if( cMetric.geo_state_count.containsKey(  event.geoState))
+			{
+				 int value = cMetric.geo_state_count.get(event.geoState);
+				 value++;
+				 cMetric.geo_state_count.put(event.geoState, value);
+			}
+			else
+			{
+				cMetric.geo_state_count.put(event.geoState, 1);
+			}
+			
+			if( cMetric.device_count.containsKey(  event.device))
+			{
+				 int value = cMetric.device_count.get(event.device);
+				 value++;
+				 cMetric.device_count.put(event.device, value);
+			}
+			else
+			{
+				cMetric.device_count.put(event.device, 1);
+			}
+			
+			if(event.event.equals("im"))
+			{
+				cMetric.im_count++;
+			}
+			else if(event.event.equals("cl"))
+			{
+				cMetric.cl_count++;
+			}
+			else if(event.event.equals("cv"))
+			{
+				cMetric.cv_count++;
+			}
+		}
+		
+		//context.write (key, cMetric);
+		context.write(cMetricToCampaignEventCountDBWritable(cMetric) ,NullWritable.get());
+		
+		
+	}
+
+	private CampaignEventCountDBWritable cMetricToCampaignEventCountDBWritable(CampaignMetric cM)
+	{
+		CampaignEventCountDBWritable CEVDBW = new CampaignEventCountDBWritable(cM.campaign_id,cM.offer_id, cM.offer_vid, cM.timestamp, cM.im_count, cM.cl_count, cM.cv_count);
+		return CEVDBW;
+	}
+}

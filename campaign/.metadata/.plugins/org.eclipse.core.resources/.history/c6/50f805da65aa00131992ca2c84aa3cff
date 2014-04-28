@@ -1,0 +1,48 @@
+package com.paypal.mpi;
+
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.mapreduce.lib.db.DBWritable;
+
+public class CampaignEventCountDBWritable implements Writable, DBWritable{
+	private int id;
+	private String name;
+	
+	public  CampaignEventCountDBWritable(int id, String name)
+	{
+		this.id=id;
+		this.name=name;
+	}
+	@Override
+	public void readFields(ResultSet in) throws SQLException {
+		id=in.getInt(1);
+		name=in.getString(2);
+		
+	}
+
+	@Override
+	public void write(PreparedStatement statement) throws SQLException {
+		statement.setInt(1,id);
+		statement.setString(2, name);
+		
+	}
+
+	@Override
+	public void readFields(DataInput arg0) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void write(DataOutput arg0) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,124 @@
+package com.paypal.mpi;
+
+import java.io.IOException;
+
+import org.apache.avro.mapred.AvroKey;
+import org.apache.avro.mapred.AvroValue;
+import org.apache.avro.mapreduce.AvroKeyValueOutputFormat;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.PosixParser;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.LazyOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
+import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
+import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
+
+import com.paypal.ci.common.CISuperSessionConstants;
+import com.paypal.fpti.sessionization.model.Event;
+import com.paypal.fpti.sessionization.model.VisitContainer;
+import com.paypal.fpti.sessionization.model.VisitKey;
+import com.paypal.fpti.sessionization.model.VisitKey.VisitKeyPartitioner;
+
+public class CampaignMetricStage2Driver implements Tool {
+  private static final String JOB_PERIOD = "JOB_PERIOD";
+
+  @SuppressWarnings("static-access")
+  protected static final Option OPTION_INPUT_PATHS = OptionBuilder
+      .withArgName("path").hasArg().isRequired(true)
+      .withDescription("Input paths (comma-separated)").create("input");
+  @SuppressWarnings("static-access")
+  protected static final Option OPTION_OUTPUT_PATH = OptionBuilder
+      .withArgName("path").hasArg().isRequired(true)
+      .withDescription("Output path").create("outputBasePath");
+  @SuppressWarnings("static-access")
+  protected static final Option OPTION_PERIOD = OptionBuilder
+      .withArgName("yyyy/mm/dd/hh24").hasArg().isRequired(true)
+      .withDescription("Period for which this job is run in yyyy/mm/dd/hh24")
+      .create("period");
+  
+  private Configuration conf;
+
+  @Override
+  public Configuration getConf() {
+    return conf;
+  }
+
+  @Override
+  public void setConf(Configuration conf) {
+    this.conf = conf;
+  }
+
+  private CommandLine parseCommandLine(String[] args) throws ParseException {
+    Options options = new Options();
+
+    options.addOption(OPTION_INPUT_PATHS);
+    options.addOption(OPTION_OUTPUT_PATH);
+    options.addOption(OPTION_PERIOD);
+    
+    CommandLineParser parser = new PosixParser();
+    CommandLine cmdLine = null;
+    HelpFormatter help = new HelpFormatter();
+
+    try {
+      cmdLine = parser.parse(options, args);
+    } catch (ParseException e) {
+      help.printHelp(this.getClass().getSimpleName(), options);
+      System.exit(-1);
+    }
+    return cmdLine;
+  }
+
+ @Override
+  public int run(String[] args) throws IOException,
+      InterruptedException, ClassNotFoundException {
+	  CommandLine cmdLine = parseCommandLine(args);
+    Job stage2Job = new Job(getConf());
+    stage2Job.setJobName("SuperSessionizer-Stage2");
+    stage2Job.setMapperClass(Mapper.class);
+    stage2Job.setReducerClass(CampaignMetriclStage2Reducer.class);
+    stage2Job.setMapOutputKeyClass(CampaignKey.class);
+    stage2Job.setMapOutputValueClass(CampaignMetric.class);
+    stage2Job.setOutputKeyClass(VisitKey.class);
+    stage2Job.setOutputValueClass(VisitContainer.class);
+    stage2Job.setInputFormatClass(SequenceFileInputFormat.class);
+    //LazyOutputFormat.setOutputFormatClass(stage2Job,
+        SequenceFileOutputFormat.class);
+    //stage2Job.setJarByClass(CampaignMetricStage2Driver.class);
+
+    String stage2InputPath =
+        cmdLine.getOptionValue("outputBasePath")
+            + "/"
+            + cmdLine.getOptionValue("period")
+            + "/";
+    SequenceFileInputFormat.setInputPaths(stage2Job, stage2InputPath);
+    
+    Configuration conf = stage2Job.getConfiguration();
+    conf.set(JOB_PERIOD, cmdLine.getOptionValue("period"));
+
+    MultipleOutputs.addNamedOutput(stage2Job,
+        CISuperSessionConstants.COMPLETED_SESSIONS,
+        SequenceFileOutputFormat.class, VisitKey.class, VisitContainer.class);
+    MultipleOutputs.addNamedOutput(stage2Job,
+        CISuperSessionConstants.INPROGESS_SESSIONS,
+        SequenceFileOutputFormat.class, VisitKey.class, Event.class);
+    MultipleOutputs.setCountersEnabled(stage2Job, true);
+
+    return stage2Job.waitForCompletion(true) == true ? 0 : -1;
+  }
+
+
+  public static void main(String[] args) throws Exception {
+    ToolRunner.run(new Configuration(), new CampaignMetricStage2Driver(), args);
+  }
+}

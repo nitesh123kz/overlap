@@ -1,0 +1,68 @@
+package com.paypal.mpi;
+
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.mapreduce.lib.db.DBWritable;
+
+public class CampaignEventCountDBWritable implements Writable, DBWritable{
+	private String CampaignID;
+	private String OfferID;
+	private String  OfferVID;
+	private String timestamp;
+	private int im_count;
+	private int cl_count;
+	private int cv_count;
+	public  CampaignEventCountDBWritable(String CampaignID,String OfferID, String OfferVID, String timestamp, int im_count, int cl_count, int cv_count)
+	{
+		this.CampaignID=CampaignID;
+		this.OfferID = OfferID;
+		this.OfferVID = OfferVID;
+		this.timestamp = timestamp;
+		this.im_count = im_count;
+		this.cl_count = cl_count;
+		this.cv_count = cv_count ;
+	}
+	@Override
+	public void readFields(ResultSet in) throws SQLException {
+		CampaignID = in.getString(1);
+		OfferID = in.getString(2);
+		OfferVID = in.getString(3);
+		timestamp = in.getString(4);
+		im_count = in.getInt(5);
+		cl_count = in.getInt(6);
+		cv_count = in.getInt(7);
+		
+	}
+
+	@Override
+	public void write(PreparedStatement statement) throws SQLException {
+		
+		statement.setString(1,CampaignID);
+		statement.setString(2, OfferID);
+		statement.setString(3,OfferVID);
+		statement.setString(4,timestamp);
+		statement.setInt(5,im_count);
+		statement.setInt(6,cl_count);
+		statement.setInt(7, cv_count );
+		
+	}
+
+	@Override
+	public void readFields(DataInput arg0) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void write(DataOutput arg0) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

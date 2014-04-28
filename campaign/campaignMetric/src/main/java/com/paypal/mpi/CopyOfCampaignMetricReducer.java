@@ -1,0 +1,214 @@
+package com.paypal.mpi;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.Reducer.Context;
+import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
+import org.apache.hadoop.io.*;
+
+public class CopyOfCampaignMetricReducer  extends Reducer<CampaignKey,CampaignEvent,CampaignKey,CampaignMetric>
+{
+	private String campaign_id="";
+	private String offer_id="";
+	private String offer_vid="";
+	//private String timestamp="";
+	@SuppressWarnings("rawtypes")
+	private MultipleOutputs multiple;
+	private Map<String,Integer> countMap  =new HashMap<String,Integer>();
+	private  Map<String,Map<String,Integer>> map = new HashMap<String,Map<String,Integer>>();
+	private String browser;
+	private String device;
+	private String OS;
+	private String location;
+	private String timestamp;
+	 
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void setup(Context context)throws java.io.IOException ,
+	InterruptedException
+	{
+		 String period = context.getConfiguration().get("period");
+		 String[] periods =  period.split("/");
+		 String time = periods[0]+"-"+periods[1]+"-"+periods[2]+" "+periods[3]+":00:00";
+		 
+		 
+		 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 Date date;
+		 multiple = new  MultipleOutputs(context);
+		try {
+			date = formatter.parse(time);
+			timestamp = formatter.format(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		 
+	}
+	public void reduce(CampaignKey key,  Iterable<CampaignEvent>  events, Context context)
+	throws java.io.IOException,InterruptedException	
+	{
+		
+		
+		campaign_id =  key.getCampaignID();
+		
+		offer_id  =  key.getOfferID();
+		
+		offer_vid =  key.getOfferVID();
+		
+		CampaignMetric cMetric = new CampaignMetric();
+		cMetric.clear();
+		countMap.clear();
+		map.clear();
+		cMetric.campaign_id = campaign_id;
+		cMetric.offer_id =  offer_id;
+		cMetric.offer_vid  = offer_vid; 
+		cMetric.timestamp  = timestamp;
+		
+		for(CampaignEvent event : events)
+		{
+			browser= event.browser;
+			if(browser==null|| browser.length()==0)
+				browser = "UNKNOWN";
+			
+			device = event.device;
+			if(device==null||device.length()==0)
+				device = "UNKNOWN";
+			
+			OS = event.os;
+			if (OS == null||OS.length()==0)
+				OS = "UNKNOWN";
+			
+			location = event.geoState;
+			if(location ==null||location.length()==0)
+				location = "UNKNOWN";
+			
+			StringBuilder build = new StringBuilder();
+			List<String> list = new LinkedList<String>();
+			list.add(browser);build.append(browser);
+			list.add(device);build.append("-"+device);
+			list.add(OS);build.append("-"+OS);
+			list.add(location);build.append("-"+location);
+			System.out.println(build.toString());
+			
+			//
+			if( map.containsKey(build.toString() ))
+			{
+				System.out.println(list);
+				Map<String,Integer> count_map=map.get(build.toString());
+				int count = count_map.get("count");
+				count++;
+				count_map.put("count", count);
+				
+				if(event.event.equals("im"))
+				{
+				int imcount = count_map.get("im_count");
+				imcount+= 1;
+				count_map.put("im_count", imcount);
+				}
+				else if(event.event.equals("cl"))
+				{
+				int clcount = count_map.get("cl_count");
+				clcount+= 1;
+				count_map.put("cl_count", clcount);
+				}
+				else if(event.event.equals("cv"))
+				{
+				int cvcount = count_map.get("cv_count");
+					
+				cvcount+= 1;
+				count_map.put("cv_count", cvcount);
+				}
+				
+				
+				
+				map.put(build.toString(),count_map);
+			}
+			else
+			{
+				Map<String,Integer>   count_map = new HashMap<String,Integer>();
+				count_map.put("count", 1);
+				if(event.event.equals("im"))
+					count_map.put("im_count", 1);
+				else
+					count_map.put("im_count", 0); 
+				if(event.event.equals("cl"))
+					count_map.put("cl_count", 1);
+				else
+					count_map.put("cl_count", 0); 
+				if(event.event.equals("cv"))
+					count_map.put("cv_count", 1);
+				else
+					count_map.put("cv_count", 0); 
+				map.put(build.toString(),count_map);
+			}
+		}
+		for(Map.Entry<String,Map<String,Integer> > entry: map.entrySet())
+		{
+			
+			//context.getCounter(entry.getKey().toString(), entry.getValue().toString()).increment(1);
+			CampaignMetricGenericCountDBWritable obj = DBObject(key,entry);
+			if(obj!=null)
+			try
+			{
+			multiple.write("DBOutput",obj, NullWritable.get());
+			}
+			catch(Exception e)
+			{
+				//log
+			}
+			
+			
+		}
+		//multiple.write ("completedstage2",key, cMetric);
+		//multiple.write("DBOutput",cMetricToCampaignEventCountDBWritable(cMetric) ,NullWritable.get());
+		
+		
+		
+	}
+	 
+	
+	
+	
+	private CampaignMetricGenericCountDBWritable DBObject(CampaignKey key, Entry<String,Map<String,Integer>>  entry)
+	{
+		String[] list = entry.getKey().split("-");
+		System.out.println(entry.getKey());
+		String  browser=list[0];
+		if(browser.length()>10)
+			browser= browser.substring(0, 10);
+		String  device=list[1];
+		if(device.length()>20)
+			device = device.substring(0, 20);
+		String  OS=list[2];
+		if(OS.length()>10)
+			OS=OS.substring(0,10);
+		String  location=list[3];
+		if(location.length()>20)
+			location=location.substring(0,10);
+			
+		
+		Map<String,Integer> value =  entry.getValue();
+		
+		CampaignMetricGenericCountDBWritable CMGCDBW = new CampaignMetricGenericCountDBWritable(key.getCampaignID(),key.getOfferID(),key.getOfferVID(),timestamp,browser,device,OS,location,value.get("im_count"),value.get("cl_count"),value.get("cv_count"),value.get("count") );
+		return CMGCDBW;
+	}
+	
+	protected void cleanup(Context context) throws IOException, InterruptedException {
+        multiple.close();
+   }
+
+	private CampaignEventCountDBWritable cMetricToCampaignEventCountDBWritable(CampaignMetric cM)
+	{
+		CampaignEventCountDBWritable CEVDBW = new CampaignEventCountDBWritable(cM.campaign_id,cM.offer_id, cM.offer_vid, cM.timestamp, cM.im_count, cM.cl_count, cM.cv_count);
+		return CEVDBW;
+	}
+}

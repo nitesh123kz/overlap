@@ -1,0 +1,13 @@
+com/paypal/mpi/CampaignMetricStage2Mapper.class
+com/paypal/mpi/CampaignEvent.class
+com/paypal/mpi/CampaignMetricStage2Reducer.class
+com/paypal/mpi/CampaignMetricConstants.class
+com/paypal/mpi/CampaignMetric.class
+com/paypal/mpi/CampaignMetricReducer.class
+com/paypal/mpi/CampaignMetricDriver.class
+com/paypal/mpi/CampaignKey.class
+com/paypal/mpi/CampaignEventCountDBWritable.class
+com/paypal/mpi/CopyOfCampaignMetricReducer.class
+com/paypal/mpi/CampaignMetricMapper.class
+com/paypal/mpi/CampaignMetricStage2Driver.class
+com/paypal/mpi/CampaignMetricGenericCountDBWritable.class

@@ -1,0 +1,16 @@
+package com.paypal.mpi;
+
+import java.io.IOException;
+
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class CampaignMetricStage2Mapper extends Mapper<CampaignKey,CampaignEvent,CampaignKey,CampaignEvent >
+{
+	
+	public void map(CampaignKey key, CampaignEvent ev, Context context) throws IOException, InterruptedException
+	{
+		context.write(key, ev);
+		
+	}
+
+}
