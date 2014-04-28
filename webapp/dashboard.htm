@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://flatfull.com/themes/scale/index.html -->
+<html lang="en" class="app js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie8 no-ie10 no-ie11 no-ios">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <title>Scale | Web Application</title>
+      <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="app.v1.css" type="text/css">
+      <script src="jquery.min.js"></script>
+      <script src="/js/bootstrap-datepicker.js"></script>
+      <script type="text/javascript" src="d3.js"></script>
+      <link href="c3.min.css" media="screen" rel="stylesheet" type="text/css">
+      <script src="c3.min.js"></script>                     
+      <link rel="stylesheet" href="/css/datepicker.css" type="text/css">
+      <script type="text/javascript" src='global.js'></script>
+      <script type="text/javascript">var select='event';</script>
+      <script type="text/javascript"  src="chart.js"></script>
+
+      <!--[if lt IE 9]> <script src="js/ie/html5shiv.js"></script> <script src="js/ie/respond.min.js"></script> <script src="js/ie/excanvas.js"></script> <![endif]-->
+      <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style>
+      <script type="text/javascript"  src='list.js'></script>
+
+      <style type="text/css">
+      .loading-container {
+                           position:absolute;
+                           top:0;
+                           right:0;
+                           bottom:0;
+                          left:0;
+                          display:none;
+                        }
+                        .loading-container:before
+                         {
+                              position:absolute;
+                              top:30%;
+                              left:50%;
+                              display:block;
+                              width:100px;
+                              height:100px;
+                              line-height:100px;
+                              margin:-50px 0 0 -50px;
+                              color:#fff;
+                              text-align:center;
+                              background:rgba(0,0,0,.9);
+                              -webkit-border-radius: 5px;
+                            -moz-border-radius: 5px;
+                            border-radius: 5px;
+                              content: 'loading...';
+                        }
+}
+      </style>
+      
+   </head>
+   <body class="" style="">
+      <section class="vbox">
+         <section>
+            <section class="hbox stretch">
+               <!-- .aside --> 
+               <aside class="bg-black aside-md hidden-print" id="nav">
+                  <section class="vbox">
+                     <section class="w-f scrollable">
+                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 665px;">
+                           <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railopacity="0.2" style="overflow: hidden; width: auto; height: 665px;">
+                              <div class="clearfix wrapper dk nav-user hidden-xs">
+                                 <div class="dropdown">
+                                    <!--<a href="http://flatfull.com/themes/scale/index.html#" class="dropdown-toggle" data-toggle="dropdown"> <span class="thumb avatar pull-left m-r"> <img src="./Scale   Web Application_files/a0.png" class="dker" alt="..."> <i class="on md b-black"></i> </span> <span class="hidden-nav-xs clear"> <span class="block m-t-xs"> <strong class="font-bold text-lt">John.Smith</strong> <b class="caret"></b> </span> <span class="text-muted text-xs block">Art Director</span> </span> </a> 
+                                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                       <li> <span class="arrow top hidden-nav-xs"></span> <a href="http://flatfull.com/themes/scale/index.html#">Settings</a> </li>
+                                       <li> <a href="http://flatfull.com/themes/scale/profile.html">Profile</a> </li>
+                                       <li> <a href="http://flatfull.com/themes/scale/index.html#"> <span class="badge bg-danger pull-right">3</span> Notifications </a> </li>
+                                       <li> <a href="http://flatfull.com/themes/scale/docs.html">Help</a> </li>
+                                       <li class="divider"></li>
+                                       <li> <a href="http://flatfull.com/themes/scale/modal.lockme.html" data-toggle="ajaxModal">Logout</a> </li>
+                                    </ul>-->
+                                    <br/>
+
+                                    <br/>
+                                 </div>
+                              </div>
+                              <!-- nav --> 
+                              <nav class="nav-primary hidden-xs">
+                                 <div class="text-muted text-sm hidden-nav-xs padder m-t-sm m-b-sm">Metric</div>
+                                 <ul class="nav nav-main" data-ride="collapse">
+                                    <li > <a onclick='option("event");' class="auto"> <i class="i i-statistics icon"> </i> <span class="font-bold">Event Counts</span> </a> 
+                                    </li>
+                                 </ul>
+                                 <div id="loading-container" class="loading-container"></div>
+                                 <ul class="nav nav-main" data-ride="collapse">
+
+                                    <li class='hide1'> <a onclick='option("browser");' class="auto"> <i class="i i-statistics icon"> </i> <span class="font-bold">Browser</span> </a> 
+                                    </li>
+
+                                    <li class='hide1'> <a onclick='option("os");' class="auto"> <i class="i i-statistics icon"> </i> <span class="font-bold">Operating System</span> </a> 
+                                    </li>
+
+                                    <li class='hide1'> <a onclick='option("location");' class="auto"> <i class="i i-statistics icon"> </i> <span class="font-bold">Location</span> </a> 
+                                    </li>
+
+                                    <li class='hide1'> <a onclick='option("device");' class="auto"> <i class="i i-statistics icon"> </i> <span class="font-bold">Device</span> </a> 
+                                    </li>
+                                    
+                                    
+                                    <!--<li>
+                                       <a href="http://flatfull.com/themes/scale/index.html#" class="auto"> <span class="pull-right text-muted"> <i class="i i-circle-sm-o text"></i> <i class="i i-circle-sm text-active"></i> </span> <i class="i i-docs icon"> </i> <span class="font-bold">Pages</span> </a> 
+                                       <ul class="nav dk">
+                                          <li> <a href="http://flatfull.com/themes/scale/profile.html" class="auto"> <i class="i i-dot"></i> <span>Profile</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/invoice.html" class="auto"> <i class="i i-dot"></i> <span>Invoice</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/intro.html" class="auto"> <i class="i i-dot"></i> <span>Intro</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/master.html" class="auto"> <i class="i i-dot"></i> <span>Master</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/gmap.html" class="auto"> <i class="i i-dot"></i> <span>Google Map</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/jvectormap.html" class="auto"> <i class="i i-dot"></i> <span>Vector Map</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/signin.html" class="auto"> <i class="i i-dot"></i> <span>Signin</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/signup.html" class="auto"> <i class="i i-dot"></i> <span>Signup</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/404.html" class="auto"> <i class="i i-dot"></i> <span>404</span> </a> </li>
+                                       </ul>
+                                    </li>
+                                    <li>
+                                       <a href="http://flatfull.com/themes/scale/index.html#" class="auto"> <span class="pull-right text-muted"> <i class="i i-circle-sm-o text"></i> <i class="i i-circle-sm text-active"></i> </span> <i class="i i-grid2 icon"> </i> <span class="font-bold">Apps</span> </a> 
+                                       <ul class="nav dk">
+                                          <li> <a href="http://flatfull.com/themes/scale/mail.html" class="auto"> <b class="badge bg-success lt pull-right">2</b> <i class="i i-dot"></i> <span>Mailbox</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/fullcalendar.html" class="auto"> <i class="i i-dot"></i> <span>Calendar</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/project.html" class="auto"> <i class="i i-dot"></i> <span>Project</span> </a> </li>
+                                          <li> <a href="http://flatfull.com/themes/scale/media.html" class="auto"> <i class="i i-dot"></i> <span>Media</span> </a> </li>
+                                       </ul>
+                                    </li>-->
+                                 </ul>
+                                 <!--<div class="line dk hidden-nav-xs"></div>
+                                 <div class="text-muted text-xs hidden-nav-xs padder m-t-sm m-b-sm">Lables</div>
+                                 <ul class="nav">
+                                    <li> <a href="http://flatfull.com/themes/scale/mail.html#work"> <i class="i i-circle-sm text-info-dk"></i> <span>Work space</span> </a> </li>
+                                    <li> <a href="http://flatfull.com/themes/scale/mail.html#social"> <i class="i i-circle-sm text-success-dk"></i> <span>Connection</span> </a> </li>
+                                    <li> <a href="http://flatfull.com/themes/scale/mail.html#projects"> <i class="i i-circle-sm text-danger-dk"></i> <span>Projects</span> </a> </li>
+                                 </ul>
+                                 <div class="text-muted text-xs hidden-nav-xs padder m-t-sm m-b-sm">Circles</div>
+                                 <ul class="nav">
+                                    <li> <a href="http://flatfull.com/themes/scale/index.html#"> <i class="i i-circle-sm-o text-success-lt"></i> <span>College</span> </a> </li>
+                                    <li> <a href="http://flatfull.com/themes/scale/index.html#"> <i class="i i-circle-sm-o text-warning"></i> <span>Social</span> </a> </li>
+                                 </ul>-->
+                              </nav>
+                              <!-- / nav --> 
+                           </div>
+                           <div class="slimScrollBar" style="background-color: rgb(0, 0, 0); width: 10px; position: absolute; top: 0px; opacity: 0.4; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; z-index: 99; right: 0px; height: 665px; background-position: initial initial; background-repeat: initial initial;"></div>
+                           <div class="slimScrollRail" style="width: 10px; height: 100%; position: absolute; top: 0px; display: none; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; background-color: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 0px; background-position: initial initial; background-repeat: initial initial;"></div>
+                        </div>
+                     </section>
+                     
+                  </section>
+               </aside>
+               <!-- /.aside --> 
+               <section id="content">
+                  <section class="hbox stretch">
+                     <section>
+                        <section class="vbox">
+                           <section class="scrollable padder">
+                              <section class="row m-b-md">
+                                 <div class="col-xs-1"></div>
+                                 <div class="col-xs-1">
+                                    <h1 class="m-b-xs text-black"  id="dashboard">Events</h3>
+                                    
+                                 </div>
+
+                                 <div class="col-sm-6">
+                                       <br/>
+                                       
+                                 </div>
+                                 
+                              </section>
+                              <!--<div class="row">
+                                 <div class="col-sm-6">
+                                    <div class="panel b-a">
+                                       <div class="row m-n">
+                                          <div class="col-md-6 b-b b-r"> <a href="http://flatfull.com/themes/scale/index.html#" class="block padder-v hover"> <span class="i-s i-s-2x pull-left m-r-sm"> <i class="i i-hexagon2 i-s-base text-danger hover-rotate"></i> <i class="i i-plus2 i-1x text-white"></i> </span> <span class="clear"> <span class="h3 block m-t-xs text-danger">2,000</span> <small class="text-muted text-u-c">New Visits</small> </span> </a> </div>
+                                          <div class="col-md-6 b-b"> <a href="http://flatfull.com/themes/scale/index.html#" class="block padder-v hover"> <span class="i-s i-s-2x pull-left m-r-sm"> <i class="i i-hexagon2 i-s-base text-success-lt hover-rotate"></i> <i class="i i-users2 i-sm text-white"></i> </span> <span class="clear"> <span class="h3 block m-t-xs text-success">75%</span> <small class="text-muted text-u-c">Bounce rate</small> </span> </a> </div>
+                                          <div class="col-md-6 b-b b-r"> <a href="http://flatfull.com/themes/scale/index.html#" class="block padder-v hover"> <span class="i-s i-s-2x pull-left m-r-sm"> <i class="i i-hexagon2 i-s-base text-info hover-rotate"></i> <i class="i i-location i-sm text-white"></i> </span> <span class="clear"> <span class="h3 block m-t-xs text-info">25 <span class="text-sm">m</span></span> <small class="text-muted text-u-c">location</small> </span> </a> </div>
+                                          <div class="col-md-6 b-b"> <a href="http://flatfull.com/themes/scale/index.html#" class="block padder-v hover"> <span class="i-s i-s-2x pull-left m-r-sm"> <i class="i i-hexagon2 i-s-base text-primary hover-rotate"></i> <i class="i i-alarm i-sm text-white"></i> </span> <span class="clear"> <span class="h3 block m-t-xs text-primary">9:30</span> <small class="text-muted text-u-c">Meeting</small> </span> </a> </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-3 col-sm-6">
+                                    <div class="panel b-a">
+                                       <div class="panel-heading no-border bg-primary lt text-center"> <a href="http://flatfull.com/themes/scale/index.html#"> <i class="fa fa-facebook fa fa-3x m-t m-b text-white"></i> </a> </div>
+                                       <div class="padder-v text-center clearfix">
+                                          <div class="col-xs-6 b-r">
+                                             <div class="h3 font-bold">42k</div>
+                                             <small class="text-muted">Friends</small> 
+                                          </div>
+                                          <div class="col-xs-6">
+                                             <div class="h3 font-bold">90</div>
+                                             <small class="text-muted">Feeds</small> 
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-3 col-sm-6">
+                                    <div class="panel b-a">
+                                       <div class="panel-heading no-border bg-info lter text-center"> <a href="http://flatfull.com/themes/scale/index.html#"> <i class="fa fa-twitter fa fa-3x m-t m-b text-white"></i> </a> </div>
+                                       <div class="padder-v text-center clearfix">
+                                          <div class="col-xs-6 b-r">
+                                             <div class="h3 font-bold">27k</div>
+                                             <small class="text-muted">Tweets</small> 
+                                          </div>
+                                          <div class="col-xs-6">
+                                             <div class="h3 font-bold">15k</div>
+                                             <small class="text-muted">Followers</small> 
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-3 hide">
+                                    <section class="panel b-a">
+                                       <header class="panel-heading b-b b-light">
+                                          <ul class="nav nav-pills pull-right">
+                                             <li> <a href="http://flatfull.com/themes/scale/ajax.pie.html" class="text-muted" data-bjax="" data-target="#b-c"> <i class="i i-cycle"></i> </a> </li>
+                                             <li> <a href="http://flatfull.com/themes/scale/index.html#" class="panel-toggle text-muted"> <i class="i i-plus text-active"></i> <i class="i i-minus text"></i> </a> </li>
+                                          </ul>
+                                          Connection 
+                                       </header>
+                                       <div class="panel-body text-center bg-light lter" id="b-c">
+                                          <div class="easypiechart inline m-b m-t easyPieChart" data-percent="60" data-line-width="4" data-bar-color="#23aa8c" data-track-color="#c5d1da" data-color="#2a3844" data-scale-color="false" data-size="120" data-line-cap="butt" data-animate="2000" style="width: 120px; height: 120px; line-height: 120px;">
+                                             <div>
+                                                <span class="h2 m-l-sm step">60</span>% 
+                                                <div class="text text-xs">completed</div>
+                                             </div>
+                                             <canvas width="120" height="120"></canvas>
+                                          </div>
+                                       </div>
+                                    </section>
+                                 </div>
+                              </div>
+                              -->
+                              <div class="row bg-light dk m-b">
+                                    <div class="col-md-6 dker">
+                                       <section>
+                                          <header class="font-bold padder-v">
+                                             <div class="pull-right">
+                                                <div class="btn-group">
+                                                   <!--<button data-toggle="dropdown" class="btn btn-sm btn-rounded btn-default dropdown-toggle"> <span class="dropdown-label">Week</span> <span class="caret"></span> </button>--> 
+                                                   <ul class="dropdown-menu dropdown-select">
+                                                      <li><a href="#"><input type="radio" name="b">Month</a></li>
+                                                      <li><a href="#"><input type="radio" name="b">Week</a></li>
+                                                      <li><a href="#"><input type="radio" name="b">Day</a></li>
+                                                   </ul>
+                                                </div>
+                                                <!--<a href="#" class="btn btn-default btn-icon btn-rounded btn-sm">Go</a>--> 
+                                             </div>
+                                             Statistics 
+                                          </header>
+                                          <div id='events' >
+                                          </div>
+
+                                       </section>
+                                    </div>
+                                    <div class="col-md-6 ">
+                                       <section>
+                                          <header class="font-bold padder-v">
+                                             <div class="pull-right">
+                                                <div class="btn-group">
+                                                   <!--<button data-toggle="dropdown" class="btn btn-sm btn-rounded btn-default dropdown-toggle"> <span class="dropdown-label">Week</span> <span class="caret"></span> </button>--> 
+                                                   <ul class="dropdown-menu dropdown-select">
+                                                      <li><a href="#"><input type="radio" name="b">Month</a></li>
+                                                      <li><a href="#"><input type="radio" name="b">Week</a></li>
+                                                      <li><a href="#"><input type="radio" name="b">Day</a></li>
+                                                   </ul>
+                                                </div>
+                                                <!--<a href="#" class="btn btn-default btn-icon btn-rounded btn-sm">Go</a>--> 
+                                             </div>
+                                             
+                                          </header>
+                                          <div id='events2' >
+                                          </div>
+                                          
+                                       </section>
+                                    </div>
+                              </div>
+                              <div class="row bg-light dk m-b">
+                                 <div class="col-md-6">
+                                    <section>
+                                       <header class="font-bold padder-v">
+                                          <div class="btn-group pull-right">
+                                             <!--<button data-toggle="dropdown" class="btn btn-sm btn-rounded btn-default dropdown-toggle"> <span class="dropdown-label">Last 24 Hours</span> <span class="caret"></span> </button> -->
+                                             <ul class="dropdown-menu dropdown-select">
+                                                <li><a href="http://flatfull.com/themes/scale/index.html#"><input type="radio" name="a">Today</a></li>
+                                                <li><a href="http://flatfull.com/themes/scale/index.html#"><input type="radio" name="a">Yesterday</a></li>
+                                                <li><a href="http://flatfull.com/themes/scale/index.html#"><input type="radio" name="a">Last 24 Hours</a></li>
+                                                <li><a href="http://flatfull.com/themes/scale/index.html#"><input type="radio" name="a">Last 7 Days</a></li>
+                                                <li><a href="http://flatfull.com/themes/scale/index.html#"><input type="radio" name="a">Last 30 days</a></li>
+                                                <li><a href="http://flatfull.com/themes/scale/index.html#"><input type="radio" name="a">Last Month</a></li>
+                                                <li><a href="http://flatfull.com/themes/scale/index.html#"><input type="radio" name="a">All Time</a></li>
+                                             </ul>
+                                          </div>
+                                        <div id="event_count2">
+                                        </div>   
+                                      
+
+                                    </section>
+                                 </div>
+                              </div>
+                              <!--<div class="row">
+                                 
+                                 <div class="col-md-4">
+                                    <section class="panel b-light">
+                                       <header class="panel-heading"><strong>Calendar</strong></header>
+                                       <div id="calendar" class="bg-light dker m-l-n-xxs m-r-n-xxs">
+                                          <div class="calendar" id="cal_vqj">
+                                             <table class="table header">
+                                                <tbody>
+                                                   <tr></tr>
+                                                </tbody>
+                                                <td><i class="fa fa-arrow-left"></i></td>
+                                                <td colspan="5" class="year span6">
+                                                   <div class="visualmonthyear">March 2014</div>
+                                                </td>
+                                                <td><i class="fa fa-arrow-right"></i></td>
+                                             </table>
+                                             <table class="daysmonth table table">
+                                                <tbody>
+                                                   <tr class="week_days">
+                                                      <td class="first">S</td>
+                                                      <td>M</td>
+                                                      <td>T</td>
+                                                      <td>W</td>
+                                                      <td>T</td>
+                                                      <td>F</td>
+                                                      <td class="last">S</td>
+                                                   </tr>
+                                                   <tr>
+                                                      <td class="invalid first"></td>
+                                                      <td class="invalid"></td>
+                                                      <td class="invalid"></td>
+                                                      <td class="invalid"></td>
+                                                      <td class="invalid"></td>
+                                                      <td class="invalid"></td>
+                                                      <td id="cal_vqj_1_3_2014" class="last"><a>1</a></td>
+                                                   </tr>
+                                                   <tr>
+                                                      <td id="cal_vqj_2_3_2014" class="first"><a>2</a></td>
+                                                      <td id="cal_vqj_3_3_2014"><a>3</a></td>
+                                                      <td id="cal_vqj_4_3_2014" class="event event_popover"><a data-original-title="Meet a friend" data-trigger="manual" class="manual_popover" rel="popover" data-content="Contents here">4</a><span style="background-color: rgb(23, 123, 187); background-position: initial initial; background-repeat: initial initial;"></span></td>
+                                                      <td id="cal_vqj_5_3_2014"><a>5</a></td>
+                                                      <td id="cal_vqj_6_3_2014"><a>6</a></td>
+                                                      <td id="cal_vqj_7_3_2014" class="event event_popover"><a data-original-title="Kick off meeting!" data-trigger="manual" class="manual_popover" rel="popover" data-content="Have a kick off meeting with .inc company">7</a><span style="background-color: rgb(27, 186, 204); background-position: initial initial; background-repeat: initial initial;"></span></td>
+                                                      <td id="cal_vqj_8_3_2014" class="last"><a>8</a></td>
+                                                   </tr>
+                                                   <tr>
+                                                      <td id="cal_vqj_9_3_2014" class="first"><a>9</a></td>
+                                                      <td id="cal_vqj_10_3_2014"><a>10</a></td>
+                                                      <td id="cal_vqj_11_3_2014"><a>11</a></td>
+                                                      <td id="cal_vqj_12_3_2014"><a>12</a></td>
+                                                      <td id="cal_vqj_13_3_2014"><a>13</a></td>
+                                                      <td id="cal_vqj_14_3_2014"><a>14</a></td>
+                                                      <td id="cal_vqj_15_3_2014" class="last"><a>15</a></td>
+                                                   </tr>
+                                                   <tr>
+                                                      <td id="cal_vqj_16_3_2014" class="first"><a>16</a></td>
+                                                      <td id="cal_vqj_17_3_2014" class="event event_popover"><a data-original-title="Milestone release" data-trigger="manual" class="manual_popover" rel="popover" data-content="Contents here">17</a><span style="background-color: rgb(252, 198, 51); background-position: initial initial; background-repeat: initial initial;"></span></td>
+                                                      <td id="cal_vqj_18_3_2014"><a>18</a></td>
+                                                      <td id="cal_vqj_19_3_2014" class="event event_tooltip"><a data-original-title="A link" href="http://www.google.com/" rel="tooltip">19</a><span style="background-color: rgb(227, 50, 68); background-position: initial initial; background-repeat: initial initial;"></span></td>
+                                                      <td id="cal_vqj_20_3_2014"><a>20</a></td>
+                                                      <td id="cal_vqj_21_3_2014"><a>21</a></td>
+                                                      <td id="cal_vqj_22_3_2014" class="last"><a>22</a></td>
+                                                   </tr>
+                                                   <tr>
+                                                      <td id="cal_vqj_23_3_2014" class="first"><a>23</a></td>
+                                                      <td id="cal_vqj_24_3_2014"><a>24</a></td>
+                                                      <td id="cal_vqj_25_3_2014"><a>25</a></td>
+                                                      <td id="cal_vqj_26_3_2014"><a>26</a></td>
+                                                      <td id="cal_vqj_27_3_2014"><a>27</a></td>
+                                                      <td id="cal_vqj_28_3_2014"><a>28</a></td>
+                                                      <td id="cal_vqj_29_3_2014" class="last"><a>29</a></td>
+                                                   </tr>
+                                                   <tr>
+                                                      <td id="cal_vqj_30_3_2014" class="first"><a>30</a></td>
+                                                      <td id="cal_vqj_31_3_2014"><a>31</a></td>
+                                                      <td class="invalid"></td>
+                                                      <td class="invalid"></td>
+                                                      <td class="invalid"></td>
+                                                      <td class="invalid"></td>
+                                                      <td class="invalid last"></td>
+                                                   </tr>
+                                                </tbody>
+                                             </table>
+                                          </div>
+                                       </div>
+                                    </section>
+                                 </div>
+                              </div>-->
+                           </section>
+                        </section>
+                     </section>
+                     <!-- side content --> 
+                     
+                     <!-- / side content --> 
+                  </section>
+                  <a href="http://flatfull.com/themes/scale/index.html#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a> 
+               </section>
+            </section>
+         </section>
+      </section>
+      <!-- Bootstrap --> <!-- App --> 
+   
+   <script type="text/javascript">
+     
+      var  im_count = [], cl_count =[], cv_count = [], browserCount=[],timestamp=[];
+
+      var json={};
+      
+      var device_name=[];
+      var device_counts=[];
+      var json_device={};
+      var device_json={};
+
+      var location_name=[];
+      var location_count=[];
+      var json_location={};
+      var  location_json={};
+
+      var os_name=[];
+      var os_count=[];
+      var json_os={};
+      var os_json={};
+
+      var json_browser={};
+     var browser_name=[];
+     var browserCount=[];
+     var  browser_json={};
+
+      var gothrough=0;
+                                                      
+      var json_data={};
+      var testdata={};
+      var data={};
+
+      var  error_data;
+      $(document).ready(function(){
+                             //$("button").click(function(){
+                               $.ajax({url:"http://10.242.80.123/originpolicy.php",success:function(result){
+                                 //var x=document.getElementById('ajax');
+                                 //x.innerHTML = JSON.stringify(result);
+                                 //alert('hello1');
+                                 json_data=result;
+                                 create();
+
+                               }});
+                               $('.hide1').hide();
+
+                               $('#loading-container').show();
+
+                               $.ajax({url:"http://10.242.80.123/originpolicy2.php",async:true,timeout:400000,error:function(errordata)
+                                 {  
+                                    error_data=errordata;
+
+                                    if(error_data.status==200)
+                                    {
+                                    data=error_data.resposneText.split(']')[0] +"]";
+                                    createGeneric();
+                                    }
+
+
+                                    //alert(errordata);
+
+
+                                 }
+                                 , success:function(result)
+                                 {
+                                 //var x=document.getElementById('ajax');
+                                 //x.innerHTML = JSON.stringify(result);
+                                 //alert('hello1');
+                                 data=result;
+                                 createGeneric();
+
+                                
+
+                               }, complete:function()
+                               {
+                                $('.hide1').show();
+                                $('#loading-container').hide();
+                               }
+                                    });
+                             //});
+                           });
+      function create()
+      {
+      d3.json("event.json",function(data)
+      {
+         testdata=data;
+         //alert('hello');
+            
+         for(var i in json_data)
+         {
+
+            im_count.push(json_data [i].IM_COUNT);
+            //alert("im_count["+i+"]="+data[i].IM_COUNT);
+            cl_count.push(json_data [i].CL_COUNT);
+            cv_count.push(json_data [i].CV_COUNT);
+
+            //var timest = new Date();   
+            //alert(data[i].timestamp);
+            timestamp.push(data[i].timestamp);
+
+            //browserCount.push(data[i].br)
+         }
+         //alert('hello');
+         makeChart();      
+
+          
+      });
+      }
+
+      function createGeneric()
+      {
+         for( var x in  data)
+              {
+               if(data[x].Device != "UNKNOWN")
+               {
+                     if(device_json.hasOwnProperty(data[x].Device))
+                     {
+                        device_json[data[x].Device]= device_json[data[x].Device]+ data[x].Count;
+                     }
+                     else
+                     {
+                        device_json[data[x].Device]  = data[x].Count;
+                     }
+               }
+
+               if(data[x].OS !="UNKNOWN")
+               {
+               if(os_json.hasOwnProperty(data[x].OS))
+               {
+                  os_json[data[x].OS] =os_json[data[x].OS]  +  data[x].Count;
+               }
+               else
+               {
+                  os_json[data[x].OS]=  data[x].Count;
+               }}
+
+               if(data[x].Location  !="UNKNOWN")
+               {
+               if(location_json.hasOwnProperty(data[x].Location))
+               {
+                  location_json[data[x].Location] =  location_json[data[x].Location]  +  data[x].Count;
+               }
+               else{
+                  location_json[data[x].Location]  =  data[x].Count;
+               }
+            }
+               if(data[x].Browser  !=  "UNKNOWN")
+               {
+                              if(browser_json.hasOwnProperty(data[x].Browser))
+                              {
+                                 browser_json[data[x].Browser] =   browser_json[data[x].Browser]  +  data[x].Count;
+                              }
+                              else
+                                 { browser_json[data[x].Browser] =  data[x].Count;}
+
+                             }
+               }
+                  
+         
+             for(var key in device_json)
+             {
+               device_name.push(key);
+               device_counts.push(device_json[key]);
+             }
+          
+
+         
+
+            
+
+             sorted=[];
+            for(var  key in  location_json)
+            {
+                sorted.push([key,  location_json[key]]);
+            }         
+
+            sorted.sort(function(a,b) { return  b[1]-a[1];});
+             for(var i = 0; i<10; i++)
+             {
+               location_name.push(sorted[i][0]);
+               location_count.push(sorted[i][1]);
+             }
+             var others=0;
+
+           
+                          
+         
+             for(var key in os_json)
+             {
+               os_name.push(key);
+               os_count.push(os_json[key]);
+             }
+           
+            for(var key in  browser_json)
+            {
+               browser_name.push(key);
+               browserCount.push(browser_json[key]);
+                                                    
+            }
+      }
+
+      /*d3.json("generic.json",function(data)
+         {
+              for( var x in  data)
+              {
+               if(device_json.hasOwnProperty(data[x].device))
+               {
+                  device_json[data[x].device]= device_json[data[x].device]+ data[x].count;
+               }
+               else
+               {
+                  device_json[data[x].device]  = data[x].count;
+               }
+
+               if(os_json.hasOwnProperty(data[x].os))
+               {
+                  os_json[data[x].os] =os_json[data[x].os]  +  data[x].count;
+               }
+               else
+               {
+                  os_json[data[x].os]=  data[x].count;
+               }
+
+               if(location_json.hasOwnProperty(data[x].location))
+               {
+                  location_json[data[x].location] =  location_json[data[x].location]  +  data[x].count;
+               }
+               else{
+                  location_json[data[x].location]  =  data[x].count;
+               }
+
+               if(browser_json.hasOwnProperty(data[x].browser))
+               {
+                  browser_json[data[x].browser] =   browser_json[data[x].browser]  +  data[x].count;
+               }
+               else
+                  { browser_json[data[x].browser] =  data[x].count;}
+
+              }
+                  
+         
+             for(var key in device_json)
+             {
+               device_name.push(key);
+               device_counts.push(device_json[key]);
+             }
+          
+
+         
+
+         
+             for(var key in location_json)
+             {
+               location_name.push(key);
+               location_count.push(location_json[key]);
+             }
+           
+                          
+         
+             for(var key in os_json)
+             {
+               os_name.push(key);
+               os_count.push(os_json[key]);
+             }
+           
+            for(var key in  browser_json)
+            {
+               browser_name.push(key);
+               browserCount.push(browser_json[key]);
+                                                    
+            }
+        
+         });*/
+      </script>
+   </body>
+
+</html>
